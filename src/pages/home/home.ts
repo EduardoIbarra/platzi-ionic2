@@ -11,7 +11,7 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
-  irALugar(){
-    this.navCtrl.push(PlacePage);
+  irALugar(placeName){
+    this.navCtrl.push(PlacePage, {name: placeName});
   }
 }
