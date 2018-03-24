@@ -19,6 +19,10 @@ export class PlacePage {
     this.placeName = navParams.get('name');
   }
 
+  navigateBack() {
+    this.navCtrl.pop();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlacePage');
   }
