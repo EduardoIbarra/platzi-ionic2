@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {TerceraPage} from "../tercera/tercera";
 
 /**
  * Generated class for the PlacePage page.
@@ -25,6 +26,9 @@ export class PlacePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlacePage');
+  }
+  goToThird(){
+    this.navCtrl.push(TerceraPage);
   }
 
 }
