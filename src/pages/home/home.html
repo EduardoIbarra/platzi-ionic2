@@ -13,7 +13,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let lugar of lugares">
+    <ion-item *ngFor="let lugar of lugares" (click)="seleccionarLugar(lugar)">
       <h2>{{lugar.nombre}}</h2>
       <h3>{{lugar.direccion}}</h3>
       <p>{{lugar.categoria}}</p>

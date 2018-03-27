@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {TerceraPage} from "../tercera/tercera";
 import {PlacesService} from "../../services/places.service";
 
@@ -18,8 +18,8 @@ import {PlacesService} from "../../services/places.service";
 export class PlacePage {
   placeName: any = null;
   lugar: any = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private placesService: PlacesService) {
-    this.placeName = navParams.get('name');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private placesService: PlacesService, private alertCtrl: AlertController) {
+    this.lugar = navParams.get('lugar') || {};
   }
 
   navigateBack() {
@@ -33,7 +33,16 @@ export class PlacePage {
     this.navCtrl.push(TerceraPage);
   }
   guardarLugar(){
-    this.lugar.id = Date.now();
-    this.placesService.createPlace(this.lugar);
+    if(!this.lugar.id){
+      this.lugar.id = Date.now();
+    }
+    this.placesService.createPlace(this.lugar).then(()=>{
+      let alert = this.alertCtrl.create({
+        title: 'Nota Guardada con Éxito',
+        buttons: ['Ok']
+      });
+      alert.present();
+      this.navCtrl.pop();
+    });
   }
 }

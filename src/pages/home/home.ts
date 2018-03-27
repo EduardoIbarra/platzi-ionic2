@@ -19,4 +19,7 @@ export class HomePage {
   irALugar(placeName){
     this.navCtrl.push(PlacePage, {name: placeName});
   }
+  seleccionarLugar(lugar){
+    this.navCtrl.push(PlacePage, {lugar: lugar});
+  }
 }
