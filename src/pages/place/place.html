@@ -14,7 +14,27 @@
 
 
 <ion-content padding>
-  {{placeName}}
-  <button ion-button (click)="navigateBack()">Regresar</button>
-  <button ion-button (click)="goToThird()">Ir a Tercera Página</button>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Categoría</ion-label>
+      <ion-select>
+        <ion-option value="lugar_publico">Lugar Público</ion-option>
+        <ion-option value="aire_libre">Aire Libre</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descripción</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+
+    <button ion-button full>Guardar</button>
+
+  </ion-list>
 </ion-content>
