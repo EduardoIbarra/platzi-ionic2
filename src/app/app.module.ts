@@ -10,7 +10,17 @@ import {PlacePage} from "../pages/place/place";
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
 import {TerceraPage} from "../pages/tercera/tercera";
-
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+import {AngularFireModule} from "angularfire2";
+export const firebaseConfig = {
+  apiKey: "AIzaSyBKX0YmmU6ybw5jqXh4qIBWJ2uoZgZXCl8",
+  authDomain: "ioncaching.firebaseapp.com",
+  databaseURL: "https://ioncaching.firebaseio.com",
+  projectId: "ioncaching",
+  storageBucket: "ioncaching.appspot.com",
+  messagingSenderId: "1071640340819"
+};
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +32,10 @@ import {TerceraPage} from "../pages/tercera/tercera";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
