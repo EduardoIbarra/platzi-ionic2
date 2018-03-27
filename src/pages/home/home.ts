@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {AlertController, NavController} from 'ionic-angular';
 import {PlacePage} from "../place/place";
 import {PlacesService} from "../../services/places.service";
 
@@ -9,7 +9,7 @@ import {PlacesService} from "../../services/places.service";
 })
 export class HomePage {
   lugares: any = [];
-  constructor(public navCtrl: NavController, private placesService: PlacesService) {
+  constructor(public navCtrl: NavController, private placesService: PlacesService, private alertCtrl: AlertController) {
     this.placesService.getPlaces().valueChanges()
       .subscribe((places)=>{
         this.lugares = places;
@@ -21,5 +21,14 @@ export class HomePage {
   }
   seleccionarLugar(lugar){
     this.navCtrl.push(PlacePage, {lugar: lugar});
+  }
+  deleteItem(lugar){
+    this.placesService.deletePlace(lugar).then(()=>{
+      let alert = this.alertCtrl.create({
+        title: 'Nota Eliminada con Éxito',
+        buttons: ['Ok']
+      });
+      alert.present();
+    });
   }
 }

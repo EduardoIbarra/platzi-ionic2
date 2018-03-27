@@ -13,10 +13,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let lugar of lugares" (click)="seleccionarLugar(lugar)">
-      <h2>{{lugar.nombre}}</h2>
-      <h3>{{lugar.direccion}}</h3>
-      <p>{{lugar.categoria}}</p>
-    </ion-item>
+    <ion-item-sliding *ngFor="let lugar of lugares">
+      <ion-item (click)="seleccionarLugar(lugar)">
+        <h2>{{lugar.nombre}}</h2>
+        <h3>{{lugar.direccion}}</h3>
+        <p>{{lugar.categoria}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button expandable (click)="deleteItem(lugar)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
