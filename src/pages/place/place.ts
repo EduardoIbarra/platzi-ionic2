@@ -34,7 +34,9 @@ export class PlacePage {
   }
   guardarLugar(){
     if(!this.lugar.id){
+      const user = JSON.parse(localStorage.getItem('usuario'));
       this.lugar.id = Date.now();
+      this.lugar.usuario = user.uid;
     }
     this.placesService.createPlace(this.lugar).then(()=>{
       let alert = this.alertCtrl.create({

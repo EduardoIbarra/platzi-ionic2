@@ -14,6 +14,8 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireModule} from "angularfire2";
 import {PlacesService} from "../services/places.service";
+import {AuthService} from "../services/auth.service";
+import {LoginPage} from "../pages/login/login";
 export const firebaseConfig = {
   apiKey: "AIzaSyBKX0YmmU6ybw5jqXh4qIBWJ2uoZgZXCl8",
   authDomain: "ioncaching.firebaseapp.com",
@@ -29,7 +31,8 @@ export const firebaseConfig = {
     PlacePage,
     TabsPage,
     ProfilePage,
-    TerceraPage
+    TerceraPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -45,13 +48,15 @@ export const firebaseConfig = {
     PlacePage,
     TabsPage,
     ProfilePage,
-    TerceraPage
+    TerceraPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PlacesService
+    PlacesService,
+    AuthService
   ]
 })
 export class AppModule {}
