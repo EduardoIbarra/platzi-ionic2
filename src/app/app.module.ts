@@ -24,6 +24,8 @@ import {Facebook} from "@ionic-native/facebook";
 import { EventosPage } from '../pages/eventos/eventos';
 import { EventoPage } from '../pages/evento/evento';
 import { EventsService } from '../services/events.service';
+import { LoginPage } from '../pages/login/login';
+import { UsersService } from '../services/users.service';
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -47,7 +49,8 @@ export const firebaseConfig = {
     ReglamentoPage,
     ReglamentoDetallePage,
     EventosPage,
-    EventoPage
+    EventoPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ export const firebaseConfig = {
     ReglamentoPage,
     ReglamentoDetallePage,
     EventosPage,
-    EventoPage
+    EventoPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -79,7 +83,8 @@ export const firebaseConfig = {
     SuggestionsService,
     ReglamentosService,
     Facebook,
-    EventsService
+    EventsService,
+    UsersService
   ]
 })
 export class AppModule {}

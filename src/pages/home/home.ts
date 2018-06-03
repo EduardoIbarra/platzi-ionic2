@@ -17,7 +17,7 @@ export class HomePage {
       });
   }
   irALugar(placeName){
-    if(!localStorage.getItem('admin')){
+    if(localStorage.getItem('admin') != 'true'){
       alert('Usted no tiene acceso para crear lugares, contacte a su representante');
       return;
     }

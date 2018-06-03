@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
 import {ReglamentoPage} from "../reglamento/reglamento";
-import { EventsPage } from '../events/events';
-import { EventoPage } from '../evento/evento';
 import { EventosPage } from '../eventos/eventos';
 
 @Component({

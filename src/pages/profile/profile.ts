@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,11 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProfilePage {
   password: string = '';
   correct_password: string = 'b9124853d8';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  user:any = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public modalCtrl: ModalController) {
+    this.user = JSON.parse(localStorage.getItem('asp_user'));
+    console.log(this.user);
   }
   handlePassword(){
     if(this.password === this.correct_password){
@@ -29,7 +30,19 @@ export class ProfilePage {
   }
   logout(){
     localStorage.removeItem('admin');
+    localStorage.removeItem('asp_user');
+    this.user = null;
     alert('Adiós');
   }
-
+  showLogin() {
+    let modal = this.modalCtrl.create(LoginPage);
+    modal.present().then(() => {
+      this.user = JSON.parse(localStorage.getItem('asp_user'));
+      console.log(this.user);
+    });
+  }
+  getUser() {
+    this.user = JSON.parse(localStorage.getItem('asp_user'));
+    return this.user;
+  }
 }

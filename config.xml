@@ -81,10 +81,10 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="1.1.19" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
-    <engine name="ios" spec="4.5.4" />
     <plugin name="cordova-plugin-facebook4" spec="^2.1.0">
         <variable name="APP_ID" value="573762069675395" />
         <variable name="APP_NAME" value="Directorio Anahuac San Patricio" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
+    <engine name="ios" spec="4.5.4" />
 </widget>

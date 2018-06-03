@@ -44,7 +44,7 @@ export class EventoPage {
       this.editing = true;
       this.event = navParams.get('event');
     }
-    this.isAdmin = (localStorage.getItem('admin'));
+    this.isAdmin = !!(localStorage.getItem('admin'));
   }
 
   ionViewDidLoad() {

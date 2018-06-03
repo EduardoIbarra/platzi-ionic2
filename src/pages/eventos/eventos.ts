@@ -24,7 +24,7 @@ export class EventosPage {
       .valueChanges().subscribe((eventos)=>{
       this.eventos = eventos;
     });
-    this.isAdmin = (localStorage.getItem('admin'));
+    this.isAdmin = !!(localStorage.getItem('admin'));
   }
 
   ionViewDidLoad() {

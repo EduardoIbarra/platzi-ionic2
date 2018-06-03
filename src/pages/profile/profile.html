@@ -14,11 +14,13 @@
 
 
 <ion-content>
-  <ion-item>
-    <ion-input [(ngModel)]="password" (keyup.enter)="handlePassword()" type="text"></ion-input>
-  </ion-item>
   <div padding>
-    <button ion-button color="secondary" (click)="handlePassword()"></button>
-    <button ion-button color="danger" (click)="logout()"></button>
+    <div *ngIf="getUser()">
+      <h2>Hola {{user.nombre}}!</h2>
+      {{user.email}}
+      <hr />
+    </div>
+    <button *ngIf="!getUser()" ion-button (click)="showLogin()" block>Ingresar/Registrarse</button>
+    <button *ngIf="getUser()" ion-button (click)="logout()" color="danger" block>Salir</button>
   </div>
 </ion-content>
