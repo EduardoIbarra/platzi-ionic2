@@ -38,9 +38,9 @@ export class LoginPage {
       this.usersService.getUser(data.uid).valueChanges().subscribe((u: any) => {
         u.details = data;
         if(u.admin) {
-          localStorage.setItem('admin', true);
+          localStorage.setItem('admin', 'true');
         }else {
-          localStorage.setItem('admin', false);
+          localStorage.setItem('admin', 'false');
         }
         localStorage.setItem('asp_user', JSON.stringify(u));
         this.dismiss();
