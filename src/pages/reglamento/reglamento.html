@@ -1,0 +1,16 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Reglamentos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of reglamentos" (click)="itemSelected(item)">
+      {{ item.titulo }}
+    </button>
+  </ion-list>
+</ion-content>

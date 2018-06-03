@@ -1,0 +1,71 @@
+<!--
+  Generated template for the PlaceEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Lugar/Contacto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input [(ngModel)]="lugar.nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Dirección</ion-label>
+      <ion-input [(ngModel)]="lugar.direccion" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Teléfono</ion-label>
+      <ion-input [(ngModel)]="lugar.telefono" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Categoría</ion-label>
+      <ion-select [(ngModel)]="lugar.categoria">
+        <ion-option value="albaniles">Albañiles</ion-option>
+        <ion-option value="electricos">Eléctricos</ion-option>
+        <ion-option value="plomeros">Plomeros</ion-option>
+        <ion-option value="limpieza">Limpieza</ion-option>
+        <ion-option value="herreros">Herreros</ion-option>
+        <ion-option value="carpinteros">Carpinteros</ion-option>
+        <ion-option value="comidas">Comidas</ion-option>
+        <ion-option value="contacto_constructora">Contacto Constructora</ion-option>
+        <ion-option value="contacto_dizan">Contacto Dizan</ion-option>
+        <ion-option value="otros">Otros</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descripción</ion-label>
+      <ion-textarea [(ngModel)]="lugar.description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Recomendado por</ion-label>
+      <ion-input [(ngModel)]="lugar.recomienda" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tags (separadas por coma)</ion-label>
+      <ion-input [(ngModel)]="lugar.tags" type="text"></ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button full (click)="guardarLugar()" color="primary">Guardar</button>
+      <button ion-button full (click)="presentModal()" color="secondary">Sugerir Cambio</button>
+    </div>
+
+  </ion-list>
+</ion-content>

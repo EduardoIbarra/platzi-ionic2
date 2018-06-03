@@ -6,13 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>Opciones</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="password" (keyup.enter)="handlePassword()" type="text"></ion-input>
+  </ion-item>
+  <div padding>
+    <button ion-button color="secondary" (click)="handlePassword()"></button>
+    <button ion-button color="danger" (click)="logout()"></button>
+  </div>
 </ion-content>

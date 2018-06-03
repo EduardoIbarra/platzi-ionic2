@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {TerceraPage} from "../tercera/tercera";
 import {PlacesService} from "../../services/places.service";
+import {CorrectInfoPage} from "../correct-info/correct-info";
 
 /**
  * Generated class for the PlacePage page.
@@ -10,7 +11,6 @@ import {PlacesService} from "../../services/places.service";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-place',
   templateUrl: 'place.html',
@@ -18,7 +18,8 @@ import {PlacesService} from "../../services/places.service";
 export class PlacePage {
   placeName: any = null;
   lugar: any = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private placesService: PlacesService, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private placesService: PlacesService, private alertCtrl: AlertController,
+              private modalCtrl: ModalController) {
     this.lugar = navParams.get('lugar') || {};
   }
 
@@ -44,5 +45,9 @@ export class PlacePage {
       alert.present();
       this.navCtrl.pop();
     });
+  }
+  presentModal() {
+    let modal = this.modalCtrl.create(CorrectInfoPage, {lugar: this.lugar});
+    modal.present();
   }
 }

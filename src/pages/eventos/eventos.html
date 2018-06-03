@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>
+      Eventos
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="nuevoEvento()" *ngIf="isAdmin">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of eventos" (click)="itemSelected(item)">
+      <h2>{{item.dateStarts}} {{item.timeStarts}}</h2>
+      <h3>{{item.nombre}} - {{item.calle}} {{item.numero}}</h3>
+      <p>{{item.type}}</p>
+    </button>
+  </ion-list>
+</ion-content>

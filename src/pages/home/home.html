@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>
-      Feed
+      Directorio ASP
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="irALugar('new')">
@@ -9,14 +9,17 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let lugar of lugares">
+    <ion-item-sliding *ngFor="let lugar of lugares | myfilter:query | sortBy : 'nombre'">
       <ion-item (click)="seleccionarLugar(lugar)">
         <h2>{{lugar.nombre}}</h2>
-        <h3>{{lugar.direccion}}</h3>
+        <h3>{{lugar.telefono}}</h3>
         <p>{{lugar.categoria}}</p>
       </ion-item>
       <ion-item-options side="right">

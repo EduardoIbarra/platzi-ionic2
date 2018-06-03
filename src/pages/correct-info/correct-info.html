@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Sugerir Corrección</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cerrar</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>Su Nombre y Dirección</ion-label>
+    <ion-input [(ngModel)]="lugar.vecino" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Qué datos deberían cambiar?</ion-label>
+    <ion-textarea [(ngModel)]="lugar.description"></ion-textarea>
+  </ion-item>
+  <div padding>
+    <button ion-button full (click)="enviarCambios()" color="primary">Enviar</button>
+  </div>
+</ion-content>

@@ -9,7 +9,6 @@ import {HomePage} from "../home/home";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-tercera',
   templateUrl: 'tercera.html',
