@@ -21,13 +21,13 @@
         <ion-option *ngFor="let type of types">{{type}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="isAdmin">
       <ion-label fixed>Calle</ion-label>
       <ion-select [disabled]="!isAdmin" [(ngModel)]="event.calle">
         <ion-option *ngFor="let calle of calles">{{calle}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="isAdmin">
       <ion-label fixed>Número</ion-label>
       <ion-input [disabled]="!isAdmin" [(ngModel)]="event.numero" type="number"></ion-input>
     </ion-item>
@@ -39,11 +39,11 @@
       <ion-label>Hora de Inicio</ion-label>
       <ion-datetime [disabled]="!isAdmin" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="isAdmin">
       <ion-label fixed>Nombre</ion-label>
       <ion-input [disabled]="!isAdmin" [(ngModel)]="event.nombre" type="text"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="isAdmin">
       <ion-label fixed>Teléfono</ion-label>
       <ion-input [disabled]="!isAdmin" [(ngModel)]="event.telefono" type="tel"></ion-input>
     </ion-item>

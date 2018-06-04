@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, ModalController, NavController, NavParams} from 'ionic-angular';
 import {TerceraPage} from "../tercera/tercera";
 import {PlacesService} from "../../services/places.service";
 import {CorrectInfoPage} from "../correct-info/correct-info";
