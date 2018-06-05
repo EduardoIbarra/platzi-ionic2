@@ -10,16 +10,24 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of eventos" (click)="itemSelected(item)">
-      <h2>{{item.dateStarts}} {{item.timeStarts}}</h2>
-      <h3 *ngIf="isAdmin()">{{item.nombre}} - {{item.calle}} {{item.numero}}</h3>
-      <p>{{item.type}}</p>
-    </button>
+    <ion-item>
+      <ion-label>Mostrar Anteriores</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="showPrevious"></ion-checkbox>
+    </ion-item>
+    <ng-container *ngFor="let item of eventos | myfilter:query">
+      <button ion-item (click)="itemSelected(item)" *ngIf="shouldDisplay(item) || showPrevious">
+        <h2>{{item.dateStarts}} {{item.timeStarts}}</h2>
+        <b><h3 *ngIf="isAdmin()"><span *ngIf="item.nombre">{{item.nombre}} - </span>{{item.calle}} {{item.numero}}</h3></b>
+        <p>{{item.type}}</p>
+      </button>
+    </ng-container>
   </ion-list>
 </ion-content>

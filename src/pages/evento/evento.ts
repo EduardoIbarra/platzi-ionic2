@@ -31,6 +31,7 @@ export class EventoPage {
     numero: null,
     dateStarts: null,
     timeStarts: null,
+    timeEnds: null,
     nombre: null,
     telefono: null,
     type: null
@@ -54,7 +55,21 @@ export class EventoPage {
       this.event.id = Date.now();
     }
     this.eventsService.createEvent(this.event).then(() => {
-      alert('Creado con éxito');
+      alert('Evento creado con éxito');
+      this.navCtrl.pop();
+    }).catch(() => {
+      alert('Error al crear evento');
+    });
+  }
+  deleteEvent() {
+    if(!confirm('Desea Eliminar este evento?')){
+      return;
+    }
+    this.eventsService.deleteEvent(this.event).then(() => {
+      alert('Evento eliminado con éxito');
+      this.navCtrl.pop();
+    }).catch(() => {
+      alert('Error al eliminar evento');
     });
   }
 

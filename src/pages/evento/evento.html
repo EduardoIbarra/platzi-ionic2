@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Evento</ion-title>
   </ion-navbar>
 
@@ -33,11 +33,15 @@
     </ion-item>
     <ion-item>
       <ion-label>Fecha del Evento</ion-label>
-      <ion-datetime [disabled]="!isAdmin" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="event.dateStarts"></ion-datetime>
+      <ion-datetime [disabled]="!isAdmin" min="2018-01-01" max="2022-12-31" displayFormat="DD-MMMM-YYYY" pickerFormat="DD-MMMM-YYYY" [(ngModel)]="event.dateStarts"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Hora de Inicio</ion-label>
       <ion-datetime [disabled]="!isAdmin" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hora de Fin</ion-label>
+      <ion-datetime [disabled]="!isAdmin" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeEnds"></ion-datetime>
     </ion-item>
     <ion-item *ngIf="isAdmin">
       <ion-label fixed>Nombre</ion-label>
@@ -50,6 +54,6 @@
   </ion-list>
   <div padding *ngIf="isAdmin">
     <button ion-button (click)="saveEvent()" block>Guardar</button>
+    <button *ngIf="editing" ion-button (click)="deleteEvent()" color="danger" block>Eliminar</button>
   </div>
-
 </ion-content>

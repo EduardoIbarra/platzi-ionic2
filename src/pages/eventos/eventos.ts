@@ -16,11 +16,18 @@ import { EventoPage } from '../evento/evento';
 })
 export class EventosPage {
   eventos: any = [];
+  query: string = '';
+  showPrevious = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public eventosService: EventsService) {
     this.eventosService.getEvents()
       .valueChanges().subscribe((eventos)=>{
       this.eventos = eventos;
+      this.eventos.forEach((e) => {
+        e.pureDate = new Date(e.dateStarts).getTime()|0;
+      });
+      this.eventos.sort(function(a,b) {return (a.pureDate > b.pureDate) ? 1 : ((b.pureDate > a.pureDate) ? -1 : 0);} );
+      console.log(this.eventos);
     });
   }
   isAdmin() {
@@ -35,5 +42,25 @@ export class EventosPage {
   itemSelected(evento){
     this.navCtrl.push(EventoPage, {event: evento});
   }
+  shouldDisplay(item){
+    return !!(new Date(item.dateStarts) > new Date());
+  }
 
+}
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'myfilter',
+  pure: false
+})
+export class MyFilterPipe implements PipeTransform {
+  transform(items: any[], filter: string): any {
+    if (!items || !filter) {
+      return items;
+    }
+    // filter items array, items which match and return true will be
+    // kept, false will be filtered out
+    return items.filter(item => JSON.stringify(item).toLowerCase().indexOf(filter.toLowerCase()) !== -1);
+  }
 }
