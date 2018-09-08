@@ -39,7 +39,7 @@ export class PlacePage {
     }
     this.placesService.createPlace(this.lugar).then(()=>{
       let alert = this.alertCtrl.create({
-        title: 'Nota Guardada con Éxito',
+        title: 'Contacto Guardado con Éxito',
         buttons: ['Ok']
       });
       alert.present();

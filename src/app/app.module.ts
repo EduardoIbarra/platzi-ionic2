@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import {HomePage, MyFilterPipe, SortPipe} from '../pages/home/home';
+import {HomePage} from '../pages/home/home';
 import {PlacePage} from "../pages/place/place";
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
@@ -26,6 +26,8 @@ import { EventoPage } from '../pages/evento/evento';
 import { EventsService } from '../services/events.service';
 import { LoginPage } from '../pages/login/login';
 import { UsersService } from '../services/users.service';
+import { MyFilterPipe, SortPipe } from './pipes.component';
+import {Camera} from "@ionic-native/camera";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -84,7 +86,8 @@ export const firebaseConfig = {
     ReglamentosService,
     Facebook,
     EventsService,
-    UsersService
+    UsersService,
+    Camera
   ]
 })
 export class AppModule {}

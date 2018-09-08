@@ -62,10 +62,21 @@
       <ion-input [(ngModel)]="lugar.tags" type="text"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+    </ion-item>
+    <div padding-left>
+      <button ion-button (click)="takePicture('camera')">
+        <ion-icon name="photos"></ion-icon>
+      </button>
+      <button ion-button (click)="takePicture('album')">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </div>
+
     <div padding>
       <button ion-button full (click)="guardarLugar()" color="primary">Guardar</button>
       <button ion-button full (click)="presentModal()" color="secondary">Sugerir Cambio</button>
     </div>
-
   </ion-list>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
 import {PlacePage} from "../place/place";
 import {PlacesService} from "../../services/places.service";
+import { PlaceEditPage } from '../place-edit/place-edit';
 
 @Component({
   selector: 'page-home',
@@ -35,50 +36,19 @@ export class HomePage {
     }
   }
   deleteItem(lugar){
+    if(!confirm('Seguro que deseas eliminar este contacto?')) {
+      return;
+    }
     if(!localStorage.getItem('admin')){
       alert('Usted no tiene acceso para eliminar lugares, contacte a su representante');
       return;
     }
     this.placesService.deletePlace(lugar).then(()=>{
       let alert = this.alertCtrl.create({
-        title: 'Nota Eliminada con Éxito',
+        title: 'Contacto Eliminado con Éxito',
         buttons: ['Ok']
       });
       alert.present();
     });
-  }
-}
-
-import { Pipe, PipeTransform } from '@angular/core';
-import {PlaceEditPage} from "../place-edit/place-edit";
-
-@Pipe({
-  name: 'myfilter',
-  pure: false
-})
-export class MyFilterPipe implements PipeTransform {
-  transform(items: any[], filter: string): any {
-    if (!items || !filter) {
-      return items;
-    }
-    // filter items array, items which match and return true will be
-    // kept, false will be filtered out
-    return items.filter(item => JSON.stringify(item).toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-  }
-}
-
-@Pipe({name: "sortBy"})
-export class SortPipe {
-  transform(array: Array<string>, args: string): Array<string> {
-    array.sort((a: any, b: any) => {
-      if ( a[args].toLowerCase() < b[args].toLowerCase() ){
-        return -1;
-      }else if( a[args].toLowerCase() > b[args].toLowerCase() ){
-        return 1;
-      }else{
-        return 0;
-      }
-    });
-    return array;
   }
 }
