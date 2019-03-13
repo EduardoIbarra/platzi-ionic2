@@ -3,12 +3,13 @@ import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
 import {ReglamentoPage} from "../reglamento/reglamento";
 import { EventosPage } from '../eventos/eventos';
+import {AnunciosPage} from "../anuncios/anuncios";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-
+  tab0Root = AnunciosPage;
   tab1Root = HomePage;
   tab2Root = ProfilePage;
   tab3Root = ReglamentoPage;

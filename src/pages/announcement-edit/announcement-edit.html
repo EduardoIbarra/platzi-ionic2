@@ -1,0 +1,54 @@
+<!--
+  Generated template for the AnnouncementEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Anuncio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input [(ngModel)]="anuncio.titulo" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descripción</ion-label>
+      <ion-textarea [(ngModel)]="anuncio.descripcion" type="text"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-select [(ngModel)]="anuncio.tipo">
+        <ion-option value="aviso">Aviso</ion-option>
+        <ion-option value="convivio">Convivio</ion-option>
+        <ion-option value="junta">Junta</ion-option>
+        <ion-option value="otro">Otro</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+    </ion-item>
+    <div padding-left>
+      <button ion-button (click)="takePicture('camera')">
+        <ion-icon name="photos"></ion-icon>
+      </button>
+      <button ion-button (click)="takePicture('album')">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </div>
+
+    <div padding>
+      <button ion-button full (click)="guardarLugar()" color="secondary">Guardar</button>
+    </div>
+  </ion-list>
+</ion-content>

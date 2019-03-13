@@ -28,6 +28,10 @@ import { LoginPage } from '../pages/login/login';
 import { UsersService } from '../services/users.service';
 import { MyFilterPipe, SortPipe } from './pipes.component';
 import {Camera} from "@ionic-native/camera";
+import {AnnouncementsService} from "../services/announcements.service";
+import {AnunciosPage} from "../pages/anuncios/anuncios";
+import {AnnouncementPage} from "../pages/announcement/announcement";
+import {AnnouncementEditPage} from "../pages/announcement-edit/announcement-edit";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -52,7 +56,10 @@ export const firebaseConfig = {
     ReglamentoDetallePage,
     EventosPage,
     EventoPage,
-    LoginPage
+    LoginPage,
+    AnunciosPage,
+    AnnouncementPage,
+    AnnouncementEditPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,10 @@ export const firebaseConfig = {
     ReglamentoDetallePage,
     EventosPage,
     EventoPage,
-    LoginPage
+    LoginPage,
+    AnunciosPage,
+    AnnouncementPage,
+    AnnouncementEditPage
   ],
   providers: [
     StatusBar,
@@ -87,7 +97,8 @@ export const firebaseConfig = {
     Facebook,
     EventsService,
     UsersService,
-    Camera
+    Camera,
+    AnnouncementsService
   ]
 })
 export class AppModule {}
