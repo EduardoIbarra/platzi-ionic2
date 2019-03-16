@@ -23,4 +23,7 @@ export class UsersService {
   setUserProperty(key, value, uid) {
     return this.afDb.object('users/' + uid + '/' + key).set(value);
   }
+  getStreets() {
+    return this.afDb.list('streets/');
+  }
 }

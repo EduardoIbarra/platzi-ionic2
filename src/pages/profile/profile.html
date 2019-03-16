@@ -20,6 +20,21 @@
       {{user.email}}
       <hr />
     </div>
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Calle</ion-label>
+        <ion-select [(ngModel)]="details.street">
+          <ion-option *ngFor="let street of streets">{{street.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Número</ion-label>
+        <ion-input [(ngModel)]="details.number" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button (click)="saveUser()" block>Guardar Detalles</button>
+      </ion-item>
+    </ion-list>
     <button *ngIf="!getUser()" ion-button (click)="showLogin()" block>Ingresar/Registrarse</button>
     <button *ngIf="getUser()" ion-button (click)="logout()" color="danger" block>Salir</button>
   </div>

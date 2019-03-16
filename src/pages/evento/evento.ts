@@ -47,13 +47,28 @@ export class EventoPage {
     this.isAdmin = !!(localStorage.getItem('admin'));
   }
 
+  zeroPad(number) {
+    return ('0'+number).slice(-2);
+  };
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventoPage');
   }
   saveEvent() {
-    if(!this.event.id) {
-      this.event.id = Date.now();
-    }
+    const date = new Date(this.event.dateStarts);
+    this.event.id = date.getFullYear() + '' + this.zeroPad(date.getMonth()+1) + '' + this.zeroPad(date.getDate());
+    const subscription = this.eventsService.getEvent(this.event.id).valueChanges().subscribe((response) => {
+      subscription.unsubscribe();
+      console.log(response);
+      if (response) {
+        alert('Ya hay un evento para esta fecha');
+        return;
+      }
+      this.event.created_at = Date.now();
+      this.doSave();
+    });
+  }
+  doSave() {
     this.eventsService.createEvent(this.event).then(() => {
       alert('Evento creado con éxito');
       this.navCtrl.pop();
