@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import { EventsService } from '../../services/events.service';
+import {UsersService} from "../../services/users.service";
 
 /**
  * Generated class for the EventoPage page.
@@ -38,13 +39,22 @@ export class EventoPage {
   };
   editing = false;
   isAdmin = false;
+  user:any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public eventsService: EventsService) {
+              public eventsService: EventsService,
+              private toastCtrl: ToastController,
+              private usersService: UsersService) {
     if(navParams.get('event') !== 'new') {
       this.editing = true;
       this.event = navParams.get('event');
     }
     this.isAdmin = !!(localStorage.getItem('admin'));
+    this.user = JSON.parse(localStorage.getItem('asp_user'));
+    if (this.user) {
+      this.getUser();
+    }
+    this.event.calle = this.user.street;
+    this.event.numero = this.user.number;
   }
 
   zeroPad(number) {
@@ -52,16 +62,27 @@ export class EventoPage {
   };
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EventoPage');
+  }
+  getUser() {
+    this.usersService.getUser(this.user.uid).valueChanges().subscribe((data) => {
+      this.user = data;
+    }, (error) => {
+      console.log(error);
+    });
   }
   saveEvent() {
     const date = new Date(this.event.dateStarts);
-    this.event.id = date.getFullYear() + '' + this.zeroPad(date.getMonth()+1) + '' + this.zeroPad(date.getDate());
+    this.event.id = date.getFullYear() + '' + this.zeroPad(date.getMonth()+1) + '' + this.zeroPad(date.getDate()+1);
     const subscription = this.eventsService.getEvent(this.event.id).valueChanges().subscribe((response) => {
       subscription.unsubscribe();
       console.log(response);
       if (response) {
-        alert('Ya hay un evento para esta fecha');
+        let toast = this.toastCtrl.create({
+          message: 'ATENCIÓN: Ya hay un evento para esta fecha',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
         return;
       }
       this.event.created_at = Date.now();

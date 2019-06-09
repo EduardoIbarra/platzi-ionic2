@@ -26,4 +26,7 @@ export class UsersService {
   getStreets() {
     return this.afDb.list('streets/');
   }
+  getChampion(street, number) {
+    return this.afDb.object(`champions/${street}/${number}`)
+  }
 }

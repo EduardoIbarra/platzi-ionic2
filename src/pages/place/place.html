@@ -24,17 +24,17 @@
       <p>{{lugar.categoria}}</p>
       <small>Creado: {{lugar.id | date}}</small>
     </ion-item>
-    <img src="https://hdimages.org/wp-content/uploads/2017/03/placeholder-image4.jpg">
+    <img src="{{lugar?.imagen || 'https://hdimages.org/wp-content/uploads/2017/03/placeholder-image4.jpg'}}">
     <ion-card-content>
-      <p><ion-icon name="megaphone"></ion-icon> {{lugar.description}}</p>
-      <p><ion-icon name="home"></ion-icon> {{lugar.direccion}}</p>
-      <p><ion-icon name="pricetags"></ion-icon> {{lugar.tags}}</p>
-      <p><ion-icon name="call"></ion-icon> {{lugar.telefono}}</p>
-      <p><ion-icon name="person"></ion-icon> {{lugar.recomienda}}</p>
+      <a *ngIf="lugar?.telefono" href="tel:{{lugar?.telefono}}" ion-button full color="primary"><ion-icon name="call"></ion-icon> | Llamar {{lugar?.telefono}}</a>
+      <p *ngIf="lugar?.description"><ion-icon name="megaphone"></ion-icon> {{lugar.description}}</p>
+      <p *ngIf="lugar?.direccion"><ion-icon name="home"></ion-icon> {{lugar.direccion}}</p>
+      <p *ngIf="lugar?.tags"><ion-icon name="pricetags"></ion-icon> {{lugar.tags}}</p>
+      <p *ngIf="lugar?.recomienda"><ion-icon name="person"></ion-icon> {{lugar.recomienda}}</p>
+      <button ion-button full (click)="presentModal()" color="secondary">Sugerir Cambio</button>
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button ion-button full (click)="presentModal()" color="secondary">Sugerir Cambio</button>
       </ion-col>
     </ion-row>
 

@@ -20,7 +20,7 @@
       {{user.email}}
       <hr />
     </div>
-    <ion-list>
+    <ion-list *ngIf="getUser()">
       <ion-item>
         <ion-label fixed>Calle</ion-label>
         <ion-select [(ngModel)]="details.street">

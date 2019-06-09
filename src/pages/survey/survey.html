@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>{{survey?.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Hola {{user?.nombre}} ({{user?.street}} {{user?.number}})</h4>
+  <div *ngIf="isChampion">
+    <h2>{{survey?.question}}</h2>
+    <p *ngIf="previousAnswer">Usted había votado por la opción <b>[{{previousAnswer.choice}}]</b>, elegir de nuevo invalidará su respuesta previa.</p>
+    <ion-list radio-group [(ngModel)]="selectedOption">
+      <ion-item *ngFor="let option of survey?.options" selected>
+        <ion-label><b>[{{option?.id}}]</b> {{option?.name}}</ion-label>
+        <ion-radio value="{{option?.id}}"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button ion-button (click)="saveAnswer()" block>Votar</button>
+  </div>
+  <div *ngIf="!isChampion">
+    <h4>Usted no es el representante de su domicilio. Si desea darse de alta como representante o cambiar el existente, favor de contactar a un miembro del comité y enviarle este identificador: {{user?.uid.substring(0,5)}}</h4>
+  </div>
+</ion-content>

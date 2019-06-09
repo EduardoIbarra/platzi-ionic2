@@ -1,0 +1,16 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Surveys</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of surveys" (click)="itemSelected(item)">
+      {{ item.title }}
+    </button>
+  </ion-list>
+</ion-content>

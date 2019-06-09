@@ -32,6 +32,9 @@ import {AnnouncementsService} from "../services/announcements.service";
 import {AnunciosPage} from "../pages/anuncios/anuncios";
 import {AnnouncementPage} from "../pages/announcement/announcement";
 import {AnnouncementEditPage} from "../pages/announcement-edit/announcement-edit";
+import {SurveysPage} from "../pages/surveys/surveys";
+import {SurveyPage} from "../pages/survey/survey";
+import {SurveysService} from "../services/surveys.service";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -59,7 +62,9 @@ export const firebaseConfig = {
     LoginPage,
     AnunciosPage,
     AnnouncementPage,
-    AnnouncementEditPage
+    AnnouncementEditPage,
+    SurveysPage,
+    SurveyPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,9 @@ export const firebaseConfig = {
     LoginPage,
     AnunciosPage,
     AnnouncementPage,
-    AnnouncementEditPage
+    AnnouncementEditPage,
+    SurveysPage,
+    SurveyPage
   ],
   providers: [
     StatusBar,
@@ -98,7 +105,8 @@ export const firebaseConfig = {
     EventsService,
     UsersService,
     Camera,
-    AnnouncementsService
+    AnnouncementsService,
+    SurveysService
   ]
 })
 export class AppModule {}
