@@ -18,7 +18,6 @@ import {CorrectInfoPage} from "../pages/correct-info/correct-info";
 import {SuggestionsService} from "../services/suggestions.service";
 import {PlaceEditPage} from "../pages/place-edit/place-edit";
 import {ReglamentoPage} from "../pages/reglamento/reglamento";
-import {ReglamentosService} from "../services/reglamentos.service";
 import {ReglamentoDetallePage} from "../pages/reglamento-detalle/reglamento-detalle";
 import {Facebook} from "@ionic-native/facebook";
 import { EventosPage } from '../pages/eventos/eventos';
@@ -35,6 +34,12 @@ import {AnnouncementEditPage} from "../pages/announcement-edit/announcement-edit
 import {SurveysPage} from "../pages/surveys/surveys";
 import {SurveyPage} from "../pages/survey/survey";
 import {SurveysService} from "../services/surveys.service";
+import {VisitsPage} from "../pages/visits/visits";
+import {ReglamentosService} from "../services/reglamentos.service";
+import {VisitsService} from "../services/visits.service";
+import {VisitNewPage} from "../pages/visit-new/visit-new";
+import {VisitReadPage} from "../pages/visit-read/visit-read";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -64,7 +69,10 @@ export const firebaseConfig = {
     AnnouncementPage,
     AnnouncementEditPage,
     SurveysPage,
-    SurveyPage
+    SurveyPage,
+    VisitsPage,
+    VisitNewPage,
+    VisitReadPage,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +100,10 @@ export const firebaseConfig = {
     AnnouncementPage,
     AnnouncementEditPage,
     SurveysPage,
-    SurveyPage
+    SurveyPage,
+    VisitsPage,
+    VisitNewPage,
+    VisitReadPage,
   ],
   providers: [
     StatusBar,
@@ -106,7 +117,9 @@ export const firebaseConfig = {
     UsersService,
     Camera,
     AnnouncementsService,
-    SurveysService
+    SurveysService,
+    VisitsService,
+    BarcodeScanner,
   ]
 })
 export class AppModule {}

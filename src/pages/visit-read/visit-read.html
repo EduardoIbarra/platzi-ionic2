@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Registro de Visita</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <div padding>
+      <button ion-button full (click)="scanQR()" color="secondary">Escannear</button>
+    </div>
+
+    <ion-item>
+      <ion-label floating>Código de Acceso</ion-label>
+      <ion-input [(ngModel)]="visit.code" type="text"></ion-input>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

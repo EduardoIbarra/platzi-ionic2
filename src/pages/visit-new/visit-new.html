@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Registro de Visita</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Nombre del Residente</ion-label>
+      <ion-input [(ngModel)]="visit.visited_name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Calle</ion-label>
+      <ion-select [(ngModel)]="visit.street">
+        <ion-option *ngFor="let st of streets" [value]="st">{{st.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Número</ion-label>
+      <ion-input [(ngModel)]="visit.street_number" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nombre o RSO del Visitante</ion-label>
+      <ion-input [(ngModel)]="visit.visitor_name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo de Visita</ion-label>
+      <ion-select [(ngModel)]="visit.type">
+        <ion-option *ngFor="let vt of visitTypes" value="{{vt.code}}">{{vt.description}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de Visita</ion-label>
+      <ion-datetime [min]="minDate" [(ngModel)]="visit.date" placeholder="Seleccionar Fecha"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Horario de Visita</ion-label>
+      <ion-select [(ngModel)]="visit.at_time">
+        <ion-option *ngFor="let t of times" value="{{t}}">{{t}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Comentarios</ion-label>
+      <ion-input [(ngModel)]="visit.comments" type="text"></ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button full (click)="save()" color="primary">Guardar</button>
+    </div>
+  </ion-list>
+</ion-content>

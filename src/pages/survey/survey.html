@@ -10,10 +10,12 @@
     <h2>{{survey?.question}}</h2>
     <p *ngIf="previousAnswer">Usted había votado por la opción <b>[{{previousAnswer.choice}}]</b>, elegir de nuevo invalidará su respuesta previa.</p>
     <ion-list radio-group [(ngModel)]="selectedOption">
-      <ion-item *ngFor="let option of survey?.options" selected>
-        <ion-label><b>[{{option?.id}}]</b> {{option?.name}}</ion-label>
-        <ion-radio value="{{option?.id}}"></ion-radio>
-      </ion-item>
+      <div *ngFor="let option of survey?.options">
+        <ion-item selected *ngIf="option?.id">
+          <ion-label><b>[{{option?.id}}]</b> {{option?.name}}</ion-label>
+          <ion-radio value="{{option?.id}}"></ion-radio>
+        </ion-item>
+      </div>
     </ion-list>
     <button ion-button (click)="saveAnswer()" block>Votar</button>
   </div>

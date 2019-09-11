@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Visitas
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="irALugar('new')">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of addresses_visits | myfilter:query | sortBy : 'visitor_name'" (click)="itemSelected(item)" [disabled]="item?.visited">
+      <h1><span *ngIf="item?.visited">[YA INGRESÓ] </span>{{ item?.visitor_name }} -> {{ item?.street?.name || item?.street }} {{ item?.street_number }}</h1>
+      <p><b>Residente: </b> {{ item?.visited_name }}</p>
+      <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
+    </button>
+  </ion-list>
+</ion-content>

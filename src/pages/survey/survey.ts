@@ -43,6 +43,10 @@ export class SurveyPage {
   }
 
   saveAnswer() {
+    if (!this.selectedOption) {
+      alert('Debe seleccionar una opción');
+      return;
+    }
     if (!confirm('Seguro que deseas votar por esta opción?')) {
       return;
     }

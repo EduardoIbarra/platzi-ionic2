@@ -32,6 +32,11 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Es Residente?</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="lugar.vecino" [checked]="false"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
       <ion-label>Categoría</ion-label>
       <ion-select [(ngModel)]="lugar.categoria">
         <ion-option value="albaniles">Albañiles</ion-option>
