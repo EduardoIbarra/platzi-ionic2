@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Registro de Visita</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="!visit?.street"><b>Debe haber verificado su dirección para poder anunciar visitas. Por favor contacte a un administrador.</b></div>
+  <div *ngIf="visit?.street" padding>
+    <h1>{{visit?.street?.name}} {{visit?.street_number}}</h1>
+    <p>Por favor use esta opción con suma precaución ya que estas visitas podrán acceder en cualquier momento al fraccionamiento.</p>
+  </div>
+  <ion-list *ngIf="visit?.street">
+    <ion-item>
+      <ion-label floating>Nombre del Residente</ion-label>
+      <ion-input [(ngModel)]="visit.visited_name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nombre o RSO del Visitante</ion-label>
+      <ion-input [(ngModel)]="visit.visitor_name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo de Visita</ion-label>
+      <ion-select [(ngModel)]="visit.type">
+        <ion-option *ngFor="let vt of visitTypes" value="{{vt.code}}">{{vt.description}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Comentarios</ion-label>
+      <ion-input [(ngModel)]="visit.comments" type="text"></ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button full (click)="save()" color="primary">Guardar</button>
+    </div>
+  </ion-list>
+</ion-content>

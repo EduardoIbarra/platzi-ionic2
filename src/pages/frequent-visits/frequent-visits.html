@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Frecuentes
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <button ion-button expand="block" (click)="newFrequentVisit()">
+    Nueva Visita Frecuente
+  </button>
+  <ion-list>
+    <button ion-item *ngFor="let item of frequent_visits | myfilter:query | sortBy : 'visitor_name'" (click)="itemSelected(item)" [disabled]="item?.visited">
+      <div>Visitante: <b>{{ item?.visitor_name }}</b></div>
+      <div>Residente: <b>{{item?.visited_name}}</b></div>
+      <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
+    </button>
+  </ion-list>
+</ion-content>

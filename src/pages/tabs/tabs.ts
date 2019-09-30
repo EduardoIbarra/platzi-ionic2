@@ -13,12 +13,12 @@ import {VisitReadPage} from "../visit-read/visit-read";
 })
 export class TabsPage {
   tab0Root = AnunciosPage;
-  tab1Root = HomePage;
-  tab2Root = ProfilePage;
+  contactsTab = HomePage;
+  profileTab = ProfilePage;
   tab3Root = ReglamentoPage;
   tab4Root = EventosPage;
   tab5Root = SurveysPage;
-  tab6Root = VisitsPage;
+  visitsTab = VisitsPage;
   tab7Root = VisitReadPage;
 
   constructor() {

@@ -11,36 +11,36 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Nombre del Residente</ion-label>
+      <ion-label floating>Nombre del Residente*</ion-label>
       <ion-input [(ngModel)]="visit.visited_name" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Calle</ion-label>
+    <ion-item *ngIf="isGuard">
+      <ion-label>Calle*</ion-label>
       <ion-select [(ngModel)]="visit.street">
         <ion-option *ngFor="let st of streets" [value]="st">{{st.name}}</ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label floating>Número</ion-label>
+    <ion-item *ngIf="isGuard">
+      <ion-label floating>Número*</ion-label>
       <ion-input [(ngModel)]="visit.street_number" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Nombre o RSO del Visitante</ion-label>
+      <ion-label floating>Nombre o RSO del Visitante*</ion-label>
       <ion-input [(ngModel)]="visit.visitor_name" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Tipo de Visita</ion-label>
+      <ion-label>Tipo de Visita*</ion-label>
       <ion-select [(ngModel)]="visit.type">
         <ion-option *ngFor="let vt of visitTypes" value="{{vt.code}}">{{vt.description}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label>Fecha de Visita</ion-label>
+      <ion-label>Fecha de Visita*</ion-label>
       <ion-datetime [min]="minDate" [(ngModel)]="visit.date" placeholder="Seleccionar Fecha"></ion-datetime>
     </ion-item>
 

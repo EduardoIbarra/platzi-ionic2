@@ -35,7 +35,17 @@
     </ion-item>
     <ion-item *ngIf="operation == 'register'">
       <ion-label fixed>Repetir</ion-label>
-      <ion-input [(ngModel)]="user.password2" type="password2"></ion-input>
+      <ion-input [(ngModel)]="user.password2" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="operation == 'register'">
+      <ion-label>Calle</ion-label>
+      <ion-select [(ngModel)]="user.street">
+        <ion-option *ngFor="let st of streets" [value]="st">{{st.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="operation == 'register'">
+      <ion-label floating>Número</ion-label>
+      <ion-input [(ngModel)]="user.street_number" type="number"></ion-input>
     </ion-item>
   </ion-list>
   <div padding>

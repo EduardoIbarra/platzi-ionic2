@@ -1,0 +1,26 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Opciones</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div padding class="center">
+    <h5>Comparta este código con su visitante, deberá presentarlo en caseta</h5>
+    <br />
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&data={{path}}" alt="">
+    <h3>{{id}}</h3>
+    <button ion-button (click)="shareCode()" color="primary">Enviar Código</button>
+    <button ion-button (click)="dismiss()" color="secondary">Regresar</button>
+    <h4 *ngIf="visit">{{visit?.visitor_name}} -> {{visit?.visited_name}} @{{visit?.street?.name}} {{visit?.street_number}}</h4>
+  </div>
+</ion-content>

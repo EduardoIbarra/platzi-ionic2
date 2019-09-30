@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar color="secondary">
-    <ion-title>Opciones</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,24 +22,11 @@
   <div padding>
     <div *ngIf="getUser()">
       <h2>Hola {{user.nombre}}!</h2>
-      {{user.email}}
+      <h3>{{addressDetails?.street?.name}} {{addressDetails?.number}}</h3>
+      <b>{{user.email}}</b>
+      <p>{{user.details.uid}}</p>
       <hr />
     </div>
-    <ion-list *ngIf="getUser()">
-      <ion-item>
-        <ion-label fixed>Calle</ion-label>
-        <ion-select [(ngModel)]="details.street">
-          <ion-option *ngFor="let street of streets">{{street.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Número</ion-label>
-        <ion-input [(ngModel)]="details.number" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button (click)="saveUser()" block>Guardar Detalles</button>
-      </ion-item>
-    </ion-list>
     <button *ngIf="!getUser()" ion-button (click)="showLogin()" block>Ingresar/Registrarse</button>
     <button *ngIf="getUser()" ion-button (click)="logout()" color="danger" block>Salir</button>
   </div>

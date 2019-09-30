@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar color="secondary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       Visitas
     </ion-title>
@@ -18,8 +23,12 @@
 <ion-content>
   <ion-list>
     <button ion-item *ngFor="let item of addresses_visits | myfilter:query | sortBy : 'visitor_name'" (click)="itemSelected(item)" [disabled]="item?.visited">
-      <h1><span *ngIf="item?.visited">[YA INGRESÓ] </span>{{ item?.visitor_name }} -> {{ item?.street?.name || item?.street }} {{ item?.street_number }}</h1>
+      <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
+      <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>
+      <h2>{{ item?.visitor_name }}</h2>
+      <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
       <p><b>Residente: </b> {{ item?.visited_name }}</p>
+      <p><b>Fecha: </b> {{ item?.date | date}}</p>
       <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
     </button>
   </ion-list>

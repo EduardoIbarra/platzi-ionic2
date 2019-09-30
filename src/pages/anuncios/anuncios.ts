@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController} from 'ionic-angular';
 import {AnnouncementsService} from "../../services/announcements.service";
 import {AnnouncementEditPage} from "../announcement-edit/announcement-edit";
 import {AnnouncementPage} from "../announcement/announcement";

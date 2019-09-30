@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { UsersService } from '../../services/users.service';
+import {CStreets, Street} from "../../constants/streets";
 
 /**
  * Generated class for the LoginPage page.
@@ -21,6 +22,7 @@ export class LoginPage {
     password2: null
   };
   operation = 'login';
+  streets: Street[] = CStreets;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl: ViewController, public usersService: UsersService) {
   }
@@ -50,9 +52,22 @@ export class LoginPage {
     });
   }
   register() {
+    if(this.user.password !== this.user.password2) {
+      alert('Las contraseñas no coinciden. Verifique e intente de nuevo.');
+      return;
+    }
+    if(!this.user.nombre || !this.user.email || !this.user.password || !this.user.password2 || !this.user.street || !this.user.street_number) {
+      alert('Todos los campos son requeridos, favor de llenarlos e intentar de nuevo');
+      return;
+    }
     this.usersService.registerWithEmailAndPassword(this.user).then((data: any) => {
       data.created_at = Date.now();
-      const thisUser: any = {uid: data.uid, email: data.email, nombre: this.user.nombre};
+      const thisUser: any = {
+        uid: data.uid,
+        email: data.email,
+        nombre: this.user.nombre,
+        address_key: this.user.street.code + this.user.street_number,
+      };
       this.usersService.createUser(thisUser).then((user) => {
         this.operation = 'login';
         alert('Registrado con éxito, ya puedes hacer Login.');

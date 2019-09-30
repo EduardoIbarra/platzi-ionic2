@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, ModalController, NavController, NavParams} from 'ionic-angular';
 import {VisitsService} from "../../services/visits.service";
 import {VisitType} from "../../constants/visit-type";
 import {VisitNewPage} from "../visit-new/visit-new";
+import {UsersService} from "../../services/users.service";
+import {VisitCreationResultPage} from "../../modals/visit-creation-result/visit-creation-result";
 
 /**
  * Generated class for the VisitsPage page.
@@ -19,50 +21,74 @@ export class VisitsPage {
   visits: any = [];
   addresses_visits: any = [];
   query: string = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  isGuard: boolean = false;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               public visitsService: VisitsService,
-              public alertCtrl: AlertController) {
-    this.visitsService.getVisits()
-      .valueChanges().subscribe((visits_p)=>{
-      this.addresses_visits = [];
-      this.visits = visits_p;
-      this.visits.forEach((address) => {
-        const address_visits = Object.keys(address).map(i => address[i]);
-        address_visits.forEach((visits) => {
-          visits = Object.keys(visits).map(i => visits[i]);
-          visits.forEach((v) => {
-            this.addresses_visits.push(v);
+              public alertCtrl: AlertController,
+              public usersService: UsersService,
+              public modalCtrl: ModalController,
+  ) {
+    this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
+    this.addresses_visits = [];
+    if (this.isGuard) {
+      let today: any = new Date(Date.now());
+      today = this.visitsService.getStringDate(today);
+      this.visitsService.getVisitsForDate(today)
+        .valueChanges().subscribe((visits_p)=>{
+        this.addresses_visits = [];
+        this.visits = visits_p;
+        this.visits.forEach((addresses) => {
+          const address_visits = Object.keys(addresses).map(function(key) {
+            return addresses[key];
           });
-        })
+          address_visits.forEach(visit => this.addresses_visits.push(visit));
+        });
+        this.visitsService.getFrequentVisits().valueChanges().subscribe((addresses) => {
+          addresses = Object.keys(addresses).map(function(key) {
+            return addresses[key];
+          });
+          addresses.forEach(address => {
+            const visits = Object.keys(address).map(function(key) {
+              return address[key];
+            });
+            visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
+          });
+          this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
+        });
       });
-      this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
-      console.log(this.addresses_visits);
-    });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad VisitsPage');
+    } else {
+      const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
+      this.visitsService.getVisitsForAddressKey(addressKey)
+        .valueChanges().subscribe((visits_p)=>{
+        this.addresses_visits = visits_p.map((obj:any)=> ({ ...obj, visit_type: VisitType[obj.type] }));
+      });
+    }
   }
 
   itemSelected(item){
-    if(confirm('Desea marcar la visita como recibida?')) {
-      const path = this.visitsService.buildPath(item);
-      this.visitsService.setAsVisited(path).then(()=>{
-        let alert = this.alertCtrl.create({
-          title: 'Visita recibida con éxito',
-          buttons: ['Ok']
+    if (!this.isGuard) {
+      this.presentModal(item.path);
+    } else {
+      if(confirm('Desea marcar la visita como recibida?')) {
+        this.visitsService.setAsVisited(item.path()).then(()=>{
+          let alert = this.alertCtrl.create({
+            title: 'Visita recibida con éxito',
+            buttons: ['Ok']
+          });
+          alert.present();
         });
-        alert.present();
-      });
+      }
     }
   }
 
   irALugar(placeName){
-    if(localStorage.getItem('admin') != 'true'){
-      alert('Usted no tiene acceso para crear visitas, contacte a su representante');
-      return;
-    }
     this.navCtrl.push(VisitNewPage, {name: placeName});
+  }
+
+  presentModal(path) {
+    const modal = this.modalCtrl.create(VisitCreationResultPage, {path: path});
+    modal.present();
   }
 
 }

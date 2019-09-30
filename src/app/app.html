@@ -1,1 +1,15 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!--<ion-nav [root]="rootPage"></ion-nav>-->
+
+<ion-menu [content]="content">
+
+  <ion-content class="bgColor ">
+    <ion-list>
+      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menuItem">
+        {{p.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
