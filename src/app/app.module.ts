@@ -39,12 +39,12 @@ import {ReglamentosService} from "../services/reglamentos.service";
 import {VisitsService} from "../services/visits.service";
 import {VisitNewPage} from "../pages/visit-new/visit-new";
 import {VisitReadPage} from "../pages/visit-read/visit-read";
-import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 import {FrequentVisitsPage} from "../pages/frequent-visits/frequent-visits";
 import {FrequentVisitNewPage} from "../pages/frequent-visit-new/frequent-visit-new";
 import { SocialSharing } from '@ionic-native/social-sharing';
 import {VisitCreationResultPage} from "../modals/visit-creation-result/visit-creation-result";
 import {Screenshot} from "@ionic-native/screenshot";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",

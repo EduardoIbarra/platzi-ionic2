@@ -5,6 +5,7 @@ import {VisitType} from "../../constants/visit-type";
 import {VisitNewPage} from "../visit-new/visit-new";
 import {UsersService} from "../../services/users.service";
 import {VisitCreationResultPage} from "../../modals/visit-creation-result/visit-creation-result";
+import {combineLatest} from "rxjs/observable/combineLatest";
 
 /**
  * Generated class for the VisitsPage page.
@@ -34,8 +35,7 @@ export class VisitsPage {
     if (this.isGuard) {
       let today: any = new Date(Date.now());
       today = this.visitsService.getStringDate(today);
-      this.visitsService.getVisitsForDate(today)
-        .valueChanges().subscribe((visits_p)=>{
+      combineLatest(this.visitsService.getVisitsForDate(today).valueChanges(), this.visitsService.getFrequentVisits().valueChanges()).subscribe(([visits_p, addresses_p]) => {
         this.addresses_visits = [];
         this.visits = visits_p;
         this.visits.forEach((addresses) => {
@@ -44,19 +44,41 @@ export class VisitsPage {
           });
           address_visits.forEach(visit => this.addresses_visits.push(visit));
         });
-        this.visitsService.getFrequentVisits().valueChanges().subscribe((addresses) => {
-          addresses = Object.keys(addresses).map(function(key) {
-            return addresses[key];
-          });
-          addresses.forEach(address => {
-            const visits = Object.keys(address).map(function(key) {
-              return address[key];
-            });
-            visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
-          });
-          this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
+
+        addresses_p = Object.keys(addresses_p).map(function(key) {
+          return addresses_p[key];
         });
+        addresses_p.forEach(address => {
+          const visits = Object.keys(address).map(function(key) {
+            return address[key];
+          });
+          visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
+        });
+        this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
       });
+      // this.visitsService.getVisitsForDate(today)
+      //   .valueChanges().subscribe((visits_p)=>{
+      //   this.addresses_visits = [];
+      //   this.visits = visits_p;
+      //   this.visits.forEach((addresses) => {
+      //     const address_visits = Object.keys(addresses).map(function(key) {
+      //       return addresses[key];
+      //     });
+      //     address_visits.forEach(visit => this.addresses_visits.push(visit));
+      //   });
+      //   this.visitsService.getFrequentVisits().valueChanges().subscribe((addresses) => {
+      //     addresses = Object.keys(addresses).map(function(key) {
+      //       return addresses[key];
+      //     });
+      //     addresses.forEach(address => {
+      //       const visits = Object.keys(address).map(function(key) {
+      //         return address[key];
+      //       });
+      //       visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
+      //     });
+      //     this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
+      //   });
+      // });
     } else {
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
       this.visitsService.getVisitsForAddressKey(addressKey)
@@ -71,7 +93,7 @@ export class VisitsPage {
       this.presentModal(item.path);
     } else {
       if(confirm('Desea marcar la visita como recibida?')) {
-        this.visitsService.setAsVisited(item.path()).then(()=>{
+        this.visitsService.setAsVisited(item).then(()=>{
           let alert = this.alertCtrl.create({
             title: 'Visita recibida con éxito',
             buttons: ['Ok']

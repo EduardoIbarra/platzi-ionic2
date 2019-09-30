@@ -45,6 +45,7 @@ export class LoginPage {
         }
         localStorage.setItem('asp_user', JSON.stringify(u));
         this.dismiss();
+        location.reload();
       });
     }).catch((e) => {
       console.log(e);
@@ -71,6 +72,7 @@ export class LoginPage {
       this.usersService.createUser(thisUser).then((user) => {
         this.operation = 'login';
         alert('Registrado con éxito, ya puedes hacer Login.');
+        location.reload();
       });
     }).catch((e) => {
       console.log(e);

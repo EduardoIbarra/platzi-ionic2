@@ -26,8 +26,13 @@ export class VisitsService {
   public createFrequentVisit(visit){
     return this.afDB.database.ref(`/frequent_visits/${visit.addressKey}/${visit.timestamp}`).set(visit);
   }
-  public setAsVisited(path){
-    return this.afDB.database.ref(`${path}/visited`).set(true);
+  public setAsVisited(visit){
+    if (visit && visit.frequent) {
+      const timestamp = Date.now();
+      return this.afDB.database.ref(`${visit.path}/visits/${timestamp}`).set(timestamp);
+    } else {
+      return this.afDB.database.ref(`${visit.path}/visited`).set(true);
+    }
   }
   public buildPath(visit) {
     const myDate: any = new Date(visit.date);

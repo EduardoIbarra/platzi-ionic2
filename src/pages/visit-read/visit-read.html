@@ -14,10 +14,13 @@
       <button ion-button full (click)="scanQR()" color="primary">Escannear</button>
     </div>
 
-    <ion-item>
-      <ion-label floating>Código de Acceso</ion-label>
-      <ion-input [(ngModel)]="visit.code" type="text"></ion-input>
-    </ion-item>
+    <div *ngIf="visit?.street" class="center">
+      <h2>{{visit?.visitor_name}} -> {{visit?.visited_name}} @{{visit?.street?.name}} {{visit?.street_number}}</h2>
+      <h4>{{visit?.date | date}}</h4>
+    </div>
 
+    <div *ngIf="visit?.street" padding>
+      <button ion-button full (click)="confirmVisit()" color="secondary">Validar Visita</button>
+    </div>
   </ion-list>
 </ion-content>

@@ -21,7 +21,7 @@
     "@angular/http": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
-    "@ionic-native/barcode-scanner": "^5.13.0",
+    "@ionic-native/barcode-scanner": "^4.20.0",
     "@ionic-native/camera": "4.12.2",
     "@ionic-native/core": "^4.5.3",
     "@ionic-native/facebook": "^4.7.0",
@@ -71,15 +71,15 @@
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
       "cordova-plugin-camera": {},
-      "phonegap-plugin-barcodescanner": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
         "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
       },
-      "com.darktalker.cordova.screenshot": {}
+      "com.darktalker.cordova.screenshot": {},
+      "phonegap-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android",

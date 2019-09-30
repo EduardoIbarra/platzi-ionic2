@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
+import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {UsersService} from "../../services/users.service";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {VisitsService} from "../../services/visits.service";
 
 /**
  * Generated class for the VisitReadPage page.
@@ -18,8 +20,10 @@ export class VisitReadPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public barcodeScanner: BarcodeScanner,
-              ) {
-    this.visit = navParams.get('lugar') || {};
+              public usersService: UsersService,
+              public visitsService: VisitsService,
+              public alertCtrl: AlertController,
+  ) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad VisitReadPage');
@@ -28,10 +32,23 @@ export class VisitReadPage {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data: ' + barcodeData.text);
       if(barcodeData.text){
-        this.visit.code = barcodeData.text
+        this.usersService.getByPath(barcodeData.text).valueChanges().subscribe((visit) => {
+          this.visit = visit;
+        });
       }
     }).catch(err => {
       console.log(err);
     });
+  }
+  confirmVisit(){
+    if(confirm('Desea marcar la visita como recibida?')) {
+      this.visitsService.setAsVisited(this.visit.path).then(()=>{
+        let alert = this.alertCtrl.create({
+          title: 'Visita recibida con éxito',
+          buttons: ['Ok']
+        });
+        alert.present().then(() => this.visit = {});
+      });
+    }
   }
 }
