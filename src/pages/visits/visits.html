@@ -22,14 +22,22 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of addresses_visits | myfilter:query | sortBy : 'visitor_name'" (click)="itemSelected(item)" [disabled]="item?.visited">
-      <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
-      <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>
-      <h2>{{ item?.visitor_name }}</h2>
-      <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
-      <p><b>Residente: </b> {{ item?.visited_name }}</p>
-      <p><b>Fecha: </b> {{ item?.date | date}}</p>
-      <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
-    </button>
+    <ion-item-sliding *ngFor="let item of addresses_visits | myfilter:query | sortBy : 'visitor_name'" [ngClass]="{'disabled': item?.visited}">
+      <ion-item (click)="itemSelected(item)">
+        <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
+        <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>
+        <h2>{{ item?.visitor_name }}</h2>
+        <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
+        <p><b>Residente: </b> {{ item?.visited_name }}</p>
+        <p><b>Fecha: </b> {{ item?.date | date}}</p>
+        <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteVisit(item)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

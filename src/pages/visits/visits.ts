@@ -56,29 +56,6 @@ export class VisitsPage {
         });
         this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
       });
-      // this.visitsService.getVisitsForDate(today)
-      //   .valueChanges().subscribe((visits_p)=>{
-      //   this.addresses_visits = [];
-      //   this.visits = visits_p;
-      //   this.visits.forEach((addresses) => {
-      //     const address_visits = Object.keys(addresses).map(function(key) {
-      //       return addresses[key];
-      //     });
-      //     address_visits.forEach(visit => this.addresses_visits.push(visit));
-      //   });
-      //   this.visitsService.getFrequentVisits().valueChanges().subscribe((addresses) => {
-      //     addresses = Object.keys(addresses).map(function(key) {
-      //       return addresses[key];
-      //     });
-      //     addresses.forEach(address => {
-      //       const visits = Object.keys(address).map(function(key) {
-      //         return address[key];
-      //       });
-      //       visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
-      //     });
-      //     this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
-      //   });
-      // });
     } else {
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
       this.visitsService.getVisitsForAddressKey(addressKey)
@@ -105,6 +82,11 @@ export class VisitsPage {
   }
 
   irALugar(placeName){
+    const isVerified = this.usersService.getUserValueFromLocalStorage('isVerified');
+    if (!isVerified) {
+      alert('Su cuenta aun no ha sido verificada y no puede registrar visitas aún. Favor de contactar al administrador del app o a miembros del comité.');
+      return;
+    }
     this.navCtrl.push(VisitNewPage, {name: placeName});
   }
 
@@ -113,4 +95,14 @@ export class VisitsPage {
     modal.present();
   }
 
+  deleteVisit(item) {
+    if(!confirm('Seguro que desea eliminar esta visita?')) {
+      return;
+    }
+    this.visitsService.deleteVisit(item.path).then((data) => {
+      alert('Visita eliminada con éxito');
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 }

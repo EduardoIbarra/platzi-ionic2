@@ -8,6 +8,11 @@ admin.initializeApp();
 exports.addVisitToVisitsByAddress = functions.database.ref('visits/{pushId}/{pushId1}/{pushId12}')
   .onCreate((snapshot) => {
     const record = snapshot.val();
-    console.log('yyyyyyyyyyyyyyy', snapshot.val());
     return admin.database().ref(`visitsByAddress/${record.street.code}${record.street_number}/${record.timestamp}`).set(record);
+  });
+
+exports.deleteVisitOnVisitsByAddress = functions.database.ref('visits/{pushId}/{pushId1}/{pushId12}')
+  .onDelete((snapshot, context) => {
+    const record = snapshot.val();
+    return admin.database().ref(`visitsByAddress/${record.street.code}${record.street_number}/${record.timestamp}`).remove();
   });

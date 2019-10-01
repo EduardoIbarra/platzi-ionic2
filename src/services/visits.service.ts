@@ -44,4 +44,7 @@ export class VisitsService {
   public getStringDate(date) {
     return `${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}`;
   }
+  public deleteVisit(path) {
+    return this.afDB.database.ref(path).remove();
+  }
 }

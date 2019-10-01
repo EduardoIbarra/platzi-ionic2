@@ -44,11 +44,27 @@ export class FrequentVisitsPage {
   }
 
   newFrequentVisit() {
+    const isVerified = this.usersService.getUserValueFromLocalStorage('isVerified');
+    if (!isVerified) {
+      alert('Su cuenta aun no ha sido verificada y no puede registrar visitas aún. Favor de contactar al administrador del app o a miembros del comité.');
+      return;
+    }
     this.navCtrl.push(FrequentVisitNewPage);
   }
 
   presentModal(path) {
     const modal = this.modalCtrl.create(VisitCreationResultPage, {path: path});
     modal.present();
+  }
+
+  deleteVisit(item) {
+    if(!confirm('Seguro que desea eliminar esta visita frecuente?')) {
+      return;
+    }
+    this.visitsService.deleteVisit(item.path).then((data) => {
+      alert('Visita frecuente eliminada con éxito');
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }

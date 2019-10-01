@@ -72,7 +72,11 @@ export class VisitNewPage {
     });
   }
   presentModal(path) {
-    const modal = this.modalCtrl.create(VisitCreationResultPage, {path: path});
-    modal.present();
+    this.navCtrl.pop().then((data) => {
+      const modal = this.modalCtrl.create(VisitCreationResultPage, {path: path});
+      modal.present();
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }
