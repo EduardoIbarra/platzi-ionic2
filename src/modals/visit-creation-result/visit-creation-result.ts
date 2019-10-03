@@ -41,8 +41,8 @@ export class VisitCreationResultPage {
   shareCode() {
     this.toDataURL(`https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${this.path}`, (dataUrl) => {
       const options = {
-        message: 'Muestre este código a su entrada', // not supported on some apps (Facebook, Instagram)
-        subject: 'Autorización de entrada', // fi. for email
+        message: `Muestre este código a su entrada o este número *${this.id}*`, // not supported on some apps (Facebook, Instagram)
+        subject: `Autorización de entrada: ${this.id}`, // fi. for email
         files: [dataUrl, `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${this.path}`], // an array of filenames either locally or remotely
         url: `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${this.path}`,
         chooserTitle: 'Escoge un app' // Android only, you can override the default share sheet title
