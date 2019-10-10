@@ -69,7 +69,9 @@ export class VisitsPage {
     if (!this.isGuard) {
       this.presentModal(item.path);
     } else {
-      if(confirm('Desea marcar la visita como recibida?')) {
+      const marbete = prompt("Ingrese por favor el número de marbete, o un 0 si no aplica");
+      if(marbete !== null) {
+        item.marbete = marbete;
         this.visitsService.setAsVisited(item).then(()=>{
           let alert = this.alertCtrl.create({
             title: 'Visita recibida con éxito',

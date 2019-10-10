@@ -16,3 +16,10 @@ exports.deleteVisitOnVisitsByAddress = functions.database.ref('visits/{pushId}/{
     const record = snapshot.val();
     return admin.database().ref(`visitsByAddress/${record.street.code}${record.street_number}/${record.timestamp}`).remove();
   });
+
+exports.addVerifiedToUser = functions.database.ref('users/{pushId}')
+  .onCreate((snapshot) => {
+    const record = snapshot.val();
+    console.log(record);
+    return admin.database().ref(`users/${record.uid}/isVerified`).set(true);
+  });

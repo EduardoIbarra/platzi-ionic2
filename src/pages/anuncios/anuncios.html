@@ -17,8 +17,7 @@
 
 <ion-content>
   <ion-list>
-    <!--<ion-item-sliding *ngFor="let anuncio of anuncioes | myfilter:query | sortBy : 'nombre'">-->
-    <ion-item-sliding *ngFor="let anuncio of anuncios | myfilter:query | sortBy : 'nombre'">
+    <ion-item-sliding *ngFor="let anuncio of anuncios | myFilter:query | sortBy : 'nombre'">
       <ion-item (click)="seleccionarAnuncio(anuncio)">
         <h1>{{anuncio.titulo}}</h1>
         <h3>{{anuncio.descripcion}}</h3>

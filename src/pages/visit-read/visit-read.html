@@ -15,12 +15,14 @@
     </div>
 
     <div *ngIf="visit?.street" class="center">
+      <h2 *ngIf="visit?.visited && !visit?.path?.includes('frequent_visits')">[ESTA VISITA HABÍA INGRESADO PREVIAMENTE]</h2>
+      <h2 *ngIf="visit?.path?.includes('frequent_visits')">[VISITANTE FRECUENTE]</h2>
       <h2>{{visit?.visitor_name}} -> {{visit?.visited_name}} @{{visit?.street?.name}} {{visit?.street_number}}</h2>
       <h4>{{visit?.date | date}}</h4>
     </div>
 
     <div *ngIf="visit?.street" padding>
-      <button ion-button full (click)="confirmVisit()" color="secondary">Validar Visita</button>
+      <button [disabled]="visit?.visited && !visit?.path?.includes('frequent_visits')" ion-button full (click)="confirmVisit()" color="secondary">Validar Visita</button>
     </div>
   </ion-list>
 </ion-content>

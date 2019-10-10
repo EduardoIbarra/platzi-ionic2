@@ -7,21 +7,23 @@ import {AnunciosPage} from "../anuncios/anuncios";
 import {SurveysPage} from "../surveys/surveys";
 import {VisitsPage} from "../visits/visits";
 import {VisitReadPage} from "../visit-read/visit-read";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab0Root = AnunciosPage;
   contactsTab = HomePage;
   profileTab = ProfilePage;
-  tab3Root = ReglamentoPage;
   tab4Root = EventosPage;
-  tab5Root = SurveysPage;
   visitsTab = VisitsPage;
-  tab7Root = VisitReadPage;
+  visitReadTab = VisitReadPage;
 
-  constructor() {
+  isGuard: any = {};
 
+  constructor(
+    private usersService: UsersService,
+  ) {
+    this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
   }
 }

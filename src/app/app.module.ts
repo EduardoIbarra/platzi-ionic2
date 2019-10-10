@@ -25,7 +25,6 @@ import { EventoPage } from '../pages/evento/evento';
 import { EventsService } from '../services/events.service';
 import { LoginPage } from '../pages/login/login';
 import { UsersService } from '../services/users.service';
-import { MyFilterPipe, SortPipe } from './pipes.component';
 import {Camera} from "@ionic-native/camera";
 import {AnnouncementsService} from "../services/announcements.service";
 import {AnunciosPage} from "../pages/anuncios/anuncios";
@@ -45,6 +44,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import {VisitCreationResultPage} from "../modals/visit-creation-result/visit-creation-result";
 import {Screenshot} from "@ionic-native/screenshot";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {AnunciosPageModule} from "../pages/anuncios/anuncios.module";
+import {PipesModule} from "../pipes/pipes.module";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -61,8 +62,6 @@ export const firebaseConfig = {
     TabsPage,
     ProfilePage,
     TerceraPage,
-    MyFilterPipe,
-    SortPipe,
     CorrectInfoPage,
     PlaceEditPage,
     ReglamentoPage,
@@ -70,7 +69,6 @@ export const firebaseConfig = {
     EventosPage,
     EventoPage,
     LoginPage,
-    AnunciosPage,
     AnnouncementPage,
     AnnouncementEditPage,
     SurveysPage,
@@ -87,7 +85,9 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AnunciosPageModule,
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

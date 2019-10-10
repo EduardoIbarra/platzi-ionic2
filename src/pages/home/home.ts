@@ -6,7 +6,7 @@ import { PlaceEditPage } from '../place-edit/place-edit';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
   lugares: any = [];

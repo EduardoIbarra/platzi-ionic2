@@ -23,7 +23,7 @@ export class VisitNewPage {
   visitTypes: IVisitType[] = CVisitTypes;
   streets: Street[] = CStreets;
   times: string[] = ['Mañana', 'Tarde', 'Noche', 'N/A'];
-  minDate: string = new Date().toISOString();
+  minDate: string = null;
   isGuard: any = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -31,6 +31,8 @@ export class VisitNewPage {
               private visitsService: VisitsService,
               private usersService: UsersService,
   ) {
+    const timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
+    this.minDate = new Date(Date.now() - timeZoneOffset).toISOString();
     this.visit = navParams.get('lugar') || {};
     this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
     if (!this.isGuard) {

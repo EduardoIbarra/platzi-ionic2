@@ -22,10 +22,11 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let item of addresses_visits | myfilter:query | sortBy : 'visitor_name'" [ngClass]="{'disabled': item?.visited}">
+    <ion-item-sliding *ngFor="let item of addresses_visits | myFilter:query | sortBy : 'visitor_name'" [ngClass]="{'disabled': item?.visited}">
       <ion-item (click)="itemSelected(item)">
         <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
         <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>
+        <span *ngIf="item?.marbete"><br />Marbete: <b>{{item.marbete}}</b></span>
         <h2>{{ item?.visitor_name }}</h2>
         <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
         <p><b>Residente: </b> {{ item?.visited_name }}</p>

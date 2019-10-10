@@ -21,7 +21,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let lugar of lugares | myfilter:query | sortBy : 'nombre'">
+    <ion-item-sliding *ngFor="let lugar of lugares | myFilter:query | sortBy : 'nombre'">
       <ion-item (click)="seleccionarLugar(lugar)" [ngClass]="{'vecino': lugar.vecino}">
         <h2>{{lugar.nombre}}</h2>
         <h3>{{lugar.telefono}}</h3>

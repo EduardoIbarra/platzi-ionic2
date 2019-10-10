@@ -29,8 +29,11 @@ export class VisitsService {
   public setAsVisited(visit){
     if (visit && visit.frequent) {
       const timestamp = Date.now();
+      this.afDB.database.ref(`${visit.path}/visits/${timestamp}/marbete`).set(visit.marbete);
+      this.afDB.database.ref(`${visit.path}/marbete`).set(visit.marbete);
       return this.afDB.database.ref(`${visit.path}/visits/${timestamp}`).set(timestamp);
     } else {
+      this.afDB.database.ref(`${visit.path}/marbete`).set(visit.marbete);
       return this.afDB.database.ref(`${visit.path}/visited`).set(true);
     }
   }

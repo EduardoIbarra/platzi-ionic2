@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.asp.app" version="2.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.asp.app" version="2.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Directorio ASP</name>
     <description>Un directorio útil para usar dentro de Anahuac San Patricio</description>
     <author email="eduardoibarra904@gmail.com" href="http://eduardoibarra.com/">Eduardo Ibarra</author>
@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+        <preference name="loadUrlTimeoutValue" value="700000" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">1234</string>
             <string name="fb_app_name">foobar</string>
