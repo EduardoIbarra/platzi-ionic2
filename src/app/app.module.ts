@@ -46,6 +46,8 @@ import {Screenshot} from "@ionic-native/screenshot";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {AnunciosPageModule} from "../pages/anuncios/anuncios.module";
 import {PipesModule} from "../pipes/pipes.module";
+import {MorososService} from "../services/morosos.service";
+import {MorososPage} from "../pages/morosos/morosos";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -79,6 +81,7 @@ export const firebaseConfig = {
     FrequentVisitsPage,
     FrequentVisitNewPage,
     VisitCreationResultPage,
+    MorososPage,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +118,7 @@ export const firebaseConfig = {
     FrequentVisitsPage,
     FrequentVisitNewPage,
     VisitCreationResultPage,
+    MorososPage,
   ],
   providers: [
     StatusBar,
@@ -133,6 +137,7 @@ export const firebaseConfig = {
     BarcodeScanner,
     SocialSharing,
     Screenshot,
+    MorososService,
   ]
 })
 export class AppModule {}

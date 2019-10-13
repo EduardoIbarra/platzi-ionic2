@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Morosos
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="irAMoroso('new')">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let moroso of morosos | myFilter:query | sortBy : 'nombre'">
+      <ion-item (click)="seleccionarMoroso(moroso)" [ngClass]="{'menuItemRed': moroso?.debt > 350, 'menuItemOrange': moroso?.debt <= 350}">
+        <h1>{{moroso?.address?.street?.name}} {{moroso?.address?.number}}</h1>
+        <h2>{{moroso.debt | currency}}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button expandable (click)="deleteItem(moroso)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

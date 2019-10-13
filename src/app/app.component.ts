@@ -8,6 +8,7 @@ import {ReglamentoPage} from "../pages/reglamento/reglamento";
 import {VisitReadPage} from "../pages/visit-read/visit-read";
 import {FrequentVisitsPage} from "../pages/frequent-visits/frequent-visits";
 import {UsersService} from "../services/users.service";
+import {MorososPage} from "../pages/morosos/morosos";
 @Component({
   templateUrl: 'app.html'
 })
@@ -17,6 +18,7 @@ export class MyApp {
   rootPage: any = TabsPage;
   pages: Array<{title: string, component: any}>;
   isGuard: boolean = false;
+  isAdmin: boolean = false;
   user: any = {};
 
   constructor(
@@ -34,8 +36,11 @@ export class MyApp {
         { title: 'Reglamento', component: ReglamentoPage },
       ];
       this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
-      if (this.isGuard) {
+      this.isAdmin = this.usersService.getUserValueFromLocalStorage('admin');
+      console.log(this.isGuard, this.isAdmin);
+      if (this.isGuard || this.isAdmin) {
         this.pages.push({ title: 'Escannear Visita', component: VisitReadPage });
+        this.pages.push({ title: 'Morosos', component: MorososPage });
       } else {
         this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
       }

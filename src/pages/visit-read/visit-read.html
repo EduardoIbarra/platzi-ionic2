@@ -22,6 +22,10 @@
     </div>
 
     <div *ngIf="visit?.street" padding>
+      <ion-item>
+        <ion-label fixed>Marbete</ion-label>
+        <ion-input type="text" [(ngModel)]="visit.marbete"></ion-input>
+      </ion-item>
       <button [disabled]="visit?.visited && !visit?.path?.includes('frequent_visits')" ion-button full (click)="confirmVisit()" color="secondary">Validar Visita</button>
     </div>
   </ion-list>

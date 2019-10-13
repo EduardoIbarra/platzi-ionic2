@@ -42,7 +42,7 @@ export class VisitReadPage {
   }
   confirmVisit(){
     if(confirm('Desea marcar la visita como recibida?')) {
-      this.visitsService.setAsVisited(this.visit.path).then(()=>{
+      this.visitsService.setAsVisited(this.visit).then(()=>{
         let alert = this.alertCtrl.create({
           title: 'Visita recibida con éxito',
           buttons: ['Ok']
