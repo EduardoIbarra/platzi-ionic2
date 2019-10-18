@@ -18,12 +18,13 @@ export class TabsPage {
   tab4Root = EventosPage;
   visitsTab = VisitsPage;
   visitReadTab = VisitReadPage;
-
   isGuard: any = {};
+  user: any = {};
 
   constructor(
     private usersService: UsersService,
   ) {
+    this.user = JSON.parse(localStorage.getItem('asp_user'));
     this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
   }
 }

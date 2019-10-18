@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {UsersService} from "../../services/users.service";
+import {MorososService} from "../../services/morosos.service";
 
 /**
  * Generated class for the ProfilePage page.
@@ -19,10 +20,23 @@ export class ProfilePage {
   user:any = {};
   details:any = {};
   addressDetails:any = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public modalCtrl: ModalController, public usersService: UsersService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public usersService: UsersService,
+    public morososSerivce: MorososService,
+  ) {
     this.user = JSON.parse(localStorage.getItem('asp_user'));
+    if (!this.user) {
+      return;
+    }
     this.addressDetails = (this.user) ? this.usersService.parseAddressFromStreetKey(this.user.address_key) : null;
+    this.morososSerivce.getMoroso(this.user.address_key).valueChanges().subscribe((data) => {
+      this.user.moroso = data;
+    }, (error) => {
+      console.log(error);
+    });
     console.log(this.user);
   }
   logout(){
@@ -30,16 +44,22 @@ export class ProfilePage {
     localStorage.removeItem('asp_user');
     this.user = null;
     alert('Nos vemos pronto, vecin@!');
+    location.reload();
   }
   showLogin() {
     let modal = this.modalCtrl.create(LoginPage);
     modal.present().then(() => {
       this.user = JSON.parse(localStorage.getItem('asp_user'));
-      console.log(this.user);
     });
   }
+  isLogged() {
+    return !!this.user;
+  }
   getUser() {
-    this.user = JSON.parse(localStorage.getItem('asp_user'));
-    return this.user;
+    this.usersService.getUser(this.user.uid).valueChanges().subscribe((user) => {
+      this.user = user;
+      localStorage.setItem('asp_user', JSON.stringify(this.user));
+      alert('Usuario actualizado correctamente');
+    });
   }
 }

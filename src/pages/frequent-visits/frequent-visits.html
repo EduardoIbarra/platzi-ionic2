@@ -15,7 +15,7 @@
     Nueva Visita Frecuente
   </button>
   <ion-list>
-    <ion-item-sliding *ngFor="let item of frequent_visits | myFilter:query | sortBy : 'visitor_name'" [ngClass]="{'disabled': item?.visited}">
+    <ion-item-sliding *ngFor="let item of frequent_visits | myFilter:query | sortBy : 'visitor_name'">
       <ion-item (click)="itemSelected(item)">
         <div>Visitante: <b>{{ item?.visitor_name }}</b></div>
         <div>Residente: <b>{{item?.visited_name}}</b></div>

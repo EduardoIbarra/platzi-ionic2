@@ -9,6 +9,7 @@ import {VisitReadPage} from "../pages/visit-read/visit-read";
 import {FrequentVisitsPage} from "../pages/frequent-visits/frequent-visits";
 import {UsersService} from "../services/users.service";
 import {MorososPage} from "../pages/morosos/morosos";
+import {SurveysPage} from "../pages/surveys/surveys";
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,23 +28,24 @@ export class MyApp {
       private splashScreen: SplashScreen,
       private usersService: UsersService,
     ) {
+    this.getUser();
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
       this.pages = [
         { title: 'Reglamento', component: ReglamentoPage },
       ];
+      if (!this.user) {
+        return;
+      }
       this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
       this.isAdmin = this.usersService.getUserValueFromLocalStorage('admin');
-      console.log(this.isGuard, this.isAdmin);
       if (this.isGuard || this.isAdmin) {
         this.pages.push({ title: 'Escannear Visita', component: VisitReadPage });
         this.pages.push({ title: 'Morosos', component: MorososPage });
-      } else {
-        this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
       }
+      this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
+      this.pages.push({ title: 'Encuestas', component: SurveysPage });
     });
   }
 

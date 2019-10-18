@@ -6,6 +6,7 @@ export interface IVisitType {
 export const CVisitTypes: IVisitType[]  = [
   { code: 'VISIT', description: 'Visita Personal', color: 'primary' },
   { code: 'FOOD', description: 'Entrega de Comida', color: 'secondary' },
+  { code: 'TRANSPORT', description: 'Uber/Taxi/Didi', color: 'danger' },
   { code: 'COURIER', description: 'Paquetería', color: 'warning' },
   { code: 'SERVICE', description: 'Servicios', color: 'dark' },
   { code: 'PROVIDER', description: 'Proveedores', color: 'danger' },
@@ -16,6 +17,7 @@ export class VisitType {
   static readonly COURIER     = new VisitType('COURIER', { description: 'Paquetería', color: 'warning' });
   static readonly SERVICE     = new VisitType('SERVICE', { description: 'Servicios', color: 'success' });
   static readonly PROVIDER    = new VisitType('PROVIDER', { description: 'Proveedores', color: 'danger' });
+  static readonly TRANSPORT    = new VisitType('TRANSPORT', { description: 'Uber/Taxi/Didi', color: 'danger' });
 
   // private to disallow creating other instances of this type
   private constructor(private readonly key: string, public readonly value: IVisitType) {

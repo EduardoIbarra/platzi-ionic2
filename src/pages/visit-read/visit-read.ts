@@ -3,6 +3,7 @@ import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {UsersService} from "../../services/users.service";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {VisitsService} from "../../services/visits.service";
+import {MorososService} from "../../services/morosos.service";
 
 /**
  * Generated class for the VisitReadPage page.
@@ -23,6 +24,7 @@ export class VisitReadPage {
               public usersService: UsersService,
               public visitsService: VisitsService,
               public alertCtrl: AlertController,
+              public morososService: MorososService,
   ) {
   }
   ionViewDidLoad() {
@@ -34,6 +36,15 @@ export class VisitReadPage {
       if(barcodeData.text){
         this.usersService.getByPath(barcodeData.text).valueChanges().subscribe((visit) => {
           this.visit = visit;
+          if(!this.visit || !this.visit.street || !this.visit.street.code) {
+            return;
+          }
+          this.morososService.getMoroso(`${this.visit.street.code}${this.visit.street_number}`)
+            .valueChanges().subscribe((data) => {
+            this.visit.moroso = data;
+          }, (error) => {
+            console.log(error);
+          });
         });
       }
     }).catch(err => {

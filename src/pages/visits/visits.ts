@@ -6,6 +6,7 @@ import {VisitNewPage} from "../visit-new/visit-new";
 import {UsersService} from "../../services/users.service";
 import {VisitCreationResultPage} from "../../modals/visit-creation-result/visit-creation-result";
 import {combineLatest} from "rxjs/observable/combineLatest";
+import {MorososService} from "../../services/morosos.service";
 
 /**
  * Generated class for the VisitsPage page.
@@ -29,13 +30,18 @@ export class VisitsPage {
               public alertCtrl: AlertController,
               public usersService: UsersService,
               public modalCtrl: ModalController,
+              public morososService: MorososService,
   ) {
     this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
     this.addresses_visits = [];
     if (this.isGuard) {
       let today: any = new Date(Date.now());
       today = this.visitsService.getStringDate(today);
-      combineLatest(this.visitsService.getVisitsForDate(today).valueChanges(), this.visitsService.getFrequentVisits().valueChanges()).subscribe(([visits_p, addresses_p]) => {
+      combineLatest(
+        this.visitsService.getVisitsForDate(today).valueChanges(),
+        this.visitsService.getFrequentVisits().valueChanges(),
+        this.morososService.getMorosos().valueChanges()
+      ).subscribe(([visits_p, addresses_p, morosos_p]) => {
         this.addresses_visits = [];
         this.visits = visits_p;
         this.visits.forEach((addresses) => {
@@ -54,7 +60,8 @@ export class VisitsPage {
           });
           visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
         });
-        this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type] }));
+        this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type], moroso: morosos_p.find((m: any) => m.address_key == obj.addressKey) }));
+        console.log(morosos_p);
       });
     } else {
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');

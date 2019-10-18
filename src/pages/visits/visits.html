@@ -31,6 +31,7 @@
         <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
         <p><b>Residente: </b> {{ item?.visited_name }}</p>
         <p><b>Fecha: </b> {{ item?.date | date}}</p>
+        <ion-badge *ngIf="item?.moroso" color="danger">Debe {{item?.moroso?.debt | currency}}</ion-badge>
         <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
       </ion-item>
       <ion-item-options side="right">

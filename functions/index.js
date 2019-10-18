@@ -5,6 +5,30 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
+const SENDGRID_API_KEY = functions.config().sendgrid.key;
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+exports.sendContactEmail = functions.database
+  .ref('contact/{pushId}')
+  .onCreate(snapshot => {
+    const record = snapshot.val();
+    console.log(record);
+    const msg = {
+      to: 'eduardoibarra904@gmail.com',
+      from: record.email,
+      subject: 'Nuevo Contacto desde el App',
+      templateId: 'd-6b59e7d83bad4248aec6c60e8985f7d4',
+      dynamic_template_data: {
+        name: record.name,
+        address_key: record.address_key,
+        contact_type: record.contact_type,
+        message: record.message,
+      }
+    };
+    return sgMail.send(msg);
+  });
+
 exports.addVisitToVisitsByAddress = functions.database.ref('visits/{pushId}/{pushId1}/{pushId12}')
   .onCreate((snapshot) => {
     const record = snapshot.val();

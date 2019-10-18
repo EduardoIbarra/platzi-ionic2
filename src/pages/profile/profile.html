@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="secondary">
@@ -20,14 +14,47 @@
 
 <ion-content>
   <div padding>
-    <div *ngIf="getUser()">
-      <h2>Hola {{user.nombre}}!</h2>
-      <h3>{{addressDetails?.street?.name}} {{addressDetails?.number}}</h3>
-      <b>{{user.email}}</b>
-      <p>{{user.details.uid}}</p>
-      <hr />
-    </div>
-    <button *ngIf="!getUser()" ion-button (click)="showLogin()" block>Ingresar/Registrarse</button>
-    <button *ngIf="getUser()" ion-button (click)="logout()" color="danger" block>Salir</button>
+    <button *ngIf="!isLogged()" ion-button (click)="showLogin()" block>Ingresar/Registrarse</button>
   </div>
+
+  <ion-card *ngIf="isLogged()">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://as2.ftcdn.net/jpg/01/92/73/47/500_F_192734702_5zrD2rTQ3CloU9hZkkqrJSbjzcTiYy1U.jpg">
+      </ion-avatar>
+      <h2>{{user?.nombre}} - {{addressDetails?.street?.name}} {{addressDetails?.number}}</h2>
+      <p><b>{{user?.email}}</b></p>
+    </ion-item>
+
+    <img src="assets/banner.jpg">
+
+    <ion-card-content>
+      <p *ngIf="this.user?.moroso">
+        <b style="color: darkred">Usted tiene un adeudo de {{this.user?.moroso?.debt | currency}}</b>, favor de saldarlo a la brevedad.
+      </p>
+      <p *ngIf="user?.champion">
+        <ion-badge color="primary">
+          Representante
+        </ion-badge>
+        <br />
+        Usted es el representante de su hogar y puede participar en votaciones
+      </p>
+      <p>Id: <b>{{user?.uid}}</b></p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button (click)="getUser()" ion-button clear small color="success" icon-start>
+          <ion-icon name='star'></ion-icon>
+          Actualizar Usuario
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button (click)="logout()" ion-button clear small color="danger" icon-start>
+          <ion-icon name='share-alt'></ion-icon>
+          Cerrar Sesión
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
