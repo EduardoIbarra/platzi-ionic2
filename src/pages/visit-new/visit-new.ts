@@ -36,6 +36,7 @@ export class VisitNewPage {
     this.visit = navParams.get('lugar') || {};
     this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
     if (!this.isGuard) {
+      this.visit.visited_name = this.usersService.getUserValueFromLocalStorage('nombre');
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
       const address = this.usersService.parseAddressFromStreetKey(addressKey);
       this.visit.street = address.street;
