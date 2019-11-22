@@ -48,6 +48,9 @@ import {AnunciosPageModule} from "../pages/anuncios/anuncios.module";
 import {PipesModule} from "../pipes/pipes.module";
 import {MorososService} from "../services/morosos.service";
 import {MorososPage} from "../pages/morosos/morosos";
+import {ContactPage} from "../pages/contact/contact";
+import {ContactsService} from "../services/contacts.service";
+import {ChartsModule} from "ng2-charts-x";
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -82,6 +85,7 @@ export const firebaseConfig = {
     FrequentVisitNewPage,
     VisitCreationResultPage,
     MorososPage,
+    ContactPage,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     AnunciosPageModule,
     PipesModule,
+    ChartsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -119,6 +124,7 @@ export const firebaseConfig = {
     FrequentVisitNewPage,
     VisitCreationResultPage,
     MorososPage,
+    ContactPage,
   ],
   providers: [
     StatusBar,
@@ -138,6 +144,7 @@ export const firebaseConfig = {
     SocialSharing,
     Screenshot,
     MorososService,
+    ContactsService,
   ]
 })
 export class AppModule {}

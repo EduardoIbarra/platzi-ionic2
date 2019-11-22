@@ -29,4 +29,7 @@ export class SurveysService {
   public getSurveyAnswer(id, address){
     return this.afDB.object(`/survey_answers/${id}/answers/${address}`);
   }
+  public getSurveysAnswered(id){
+    return this.afDB.object(`/surveysAnswered/${id}`);
+  }
 }

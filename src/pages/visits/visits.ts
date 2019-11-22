@@ -22,8 +22,10 @@ import {MorososService} from "../../services/morosos.service";
 export class VisitsPage {
   visits: any = [];
   addresses_visits: any = [];
+  new_addresses_visits: any = [];
   query: string = '';
   isGuard: boolean = false;
+  viewPrevious: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public visitsService: VisitsService,
@@ -34,8 +36,8 @@ export class VisitsPage {
   ) {
     this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
     this.addresses_visits = [];
+    let today: any = new Date(Date.now());
     if (this.isGuard) {
-      let today: any = new Date(Date.now());
       today = this.visitsService.getStringDate(today);
       combineLatest(
         this.visitsService.getVisitsForDate(today).valueChanges(),
@@ -68,6 +70,8 @@ export class VisitsPage {
       this.visitsService.getVisitsForAddressKey(addressKey)
         .valueChanges().subscribe((visits_p)=>{
         this.addresses_visits = visits_p.map((obj:any)=> ({ ...obj, visit_type: VisitType[obj.type] }));
+        const midnight = new Date(today.setHours(0,0,0,0));
+        this.new_addresses_visits = this.addresses_visits.filter(av => new Date(av.date) >= midnight);
       });
     }
   }

@@ -10,6 +10,7 @@ import {FrequentVisitsPage} from "../pages/frequent-visits/frequent-visits";
 import {UsersService} from "../services/users.service";
 import {MorososPage} from "../pages/morosos/morosos";
 import {SurveysPage} from "../pages/surveys/surveys";
+import {ContactPage} from "../pages/contact/contact";
 @Component({
   templateUrl: 'app.html'
 })
@@ -46,6 +47,7 @@ export class MyApp {
       }
       this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
       this.pages.push({ title: 'Encuestas', component: SurveysPage });
+      this.pages.push({ title: 'Contacto', component: ContactPage });
     });
   }
 

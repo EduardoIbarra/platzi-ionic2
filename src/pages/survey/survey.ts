@@ -21,6 +21,34 @@ export class SurveyPage {
   previousAnswer: any = null;
   isChampion = false;
   address: any = null;
+  surveyAnswered: any = null;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+
+  //Chart Labels
+  public barChartLabels:string[] = ['Pregunta'];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+
+  //Chart data
+  public barChartData:any[] = [
+    {data: [50], label: 'Opción 1'},
+    {data: [50], label: 'Opción 2'}
+  ];
+
+  // Chart events
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+
+  // Chart events
+  public chartHovered(e:any):void {
+    console.log(e);
+  }
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,11 +60,27 @@ export class SurveyPage {
     this.isChampion = this.userService.getUserValueFromLocalStorage('champion');
     this.user = JSON.parse(localStorage.getItem('asp_user'));
     this.survey = this.navParams.get('survey');
+    this.barChartLabels = [this.survey.title];
     this.surveysService.getSurveyAnswer(this.survey.id, this.address).valueChanges().subscribe((data) => {
       this.previousAnswer = data;
     }, (error) => {
       console.log(error);
     });
+    if (this.survey.finished) {
+      this.surveysService.getSurveysAnswered(this.survey.id).valueChanges().subscribe((data) => {
+        this.surveyAnswered = data;
+        console.log(this.surveyAnswered);
+        this.barChartData = [];
+        this.surveyAnswered.options.forEach((o) => {
+          this.barChartData.push({
+            data: [o.count],
+            label: o.answer.name,
+          });
+        });
+      }, (error) => {
+        console.log(error);
+      });
+    }
   }
 
   ionViewDidLoad() {
