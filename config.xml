@@ -97,6 +97,8 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="This app requires photo library access to function properly." />
     </plugin>
     <plugin name="com.darktalker.cordova.screenshot" spec="^0.1.6" />
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^4.1.0" />
     <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^5.0.1" />
+    <plugin name="cordova-plugin-firebase" spec="^2.0.5" />
 </widget>
