@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database/database';
+import {AngularFireDatabase} from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {CStreets, Street} from "../constants/streets";
 
