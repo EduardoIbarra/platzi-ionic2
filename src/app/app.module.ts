@@ -51,7 +51,6 @@ import {MorososPage} from "../pages/morosos/morosos";
 import {ContactPage} from "../pages/contact/contact";
 import {ContactsService} from "../services/contacts.service";
 import {ChartsModule} from "ng2-charts-x";
-import { FcmProvider } from '../providers/fcm/fcm';
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -146,7 +145,6 @@ export const firebaseConfig = {
     Screenshot,
     MorososService,
     ContactsService,
-    FcmProvider,
   ]
 })
 export class AppModule {}
