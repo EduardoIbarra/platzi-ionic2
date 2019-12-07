@@ -36,8 +36,7 @@ export class LoginPage {
   }
   login() {
     this.usersService.signInWithEmailAndPassword(this.user).then((data: any) => {
-      this.usersService.getUser(data.uid).valueChanges().subscribe((u: any) => {
-        u.details = data;
+      this.usersService.getUser(data.uid || data.user && data.user.uid).valueChanges().subscribe((u: any) => {
         if(u.admin) {
           localStorage.setItem('admin', 'true');
         }else {

@@ -36,10 +36,17 @@
         <ion-badge color="primary">
           Representante
         </ion-badge>
-        <br />
-        Usted es el representante de su hogar y puede participar en votaciones
+        Usted puede votar
       </p>
-      <p>Id: <b>{{user?.uid}}</b></p>
+      <div *ngIf="user && !user.phone">
+        <b>Si desea registrar su número de teléfono en caseta en caso de tener visitas inesperadas o alguna emercencia ocurra en su domicilio:</b>
+        <button ion-button (click)="registerPhoneNumber()" block>Registrar mi Teléfono</button>
+      </div>
+      <hr />
+      <div *ngIf="user && user.phone">
+        <p>Su teléfono registrado es <b>{{user.phone}}</b>, si desea cambiarlo:</p>
+        <button ion-button (click)="registerPhoneNumber()" block>Modificar mi Teléfono</button>
+      </div>
     </ion-card-content>
 
     <ion-row no-padding>

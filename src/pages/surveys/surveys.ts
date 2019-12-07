@@ -21,6 +21,7 @@ export class SurveysPage {
     this.surveysService.getSurveys()
       .valueChanges().subscribe((surveys)=>{
         this.surveys = surveys;
+        this.surveys.reverse();
         console.log(surveys);
     });
   }

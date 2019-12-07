@@ -62,4 +62,17 @@ export class ProfilePage {
       alert('Usuario actualizado correctamente');
     });
   }
+  registerPhoneNumber() {
+    let phone = prompt("Ingrese su teléfono por favor:");
+    phone = phone.replace(/\D+/g, '');
+    if (!phone || phone.length < 7) {
+      alert('Debe ingresar un número de teléfono válido');
+      return;
+    }
+    this.usersService.setUserProperty('phone', phone, this.user.uid).then((data) => {
+      this.getUser();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 }

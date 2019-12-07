@@ -10,6 +10,7 @@
 <ion-content>
   <ion-list>
     <button ion-item *ngFor="let item of surveys" (click)="itemSelected(item)">
+      <ion-icon *ngIf="item?.finished" name="checkmark"></ion-icon>
       {{ item.title }}
     </button>
   </ion-list>
