@@ -63,15 +63,15 @@ export class LoginPage {
     this.usersService.registerWithEmailAndPassword(this.user).then((data: any) => {
       data.created_at = Date.now();
       const thisUser: any = {
-        uid: data.uid,
-        email: data.email,
+        uid: data.uid || data.user && data.user.uid,
+        email: this.user.email,
         nombre: this.user.nombre,
         address_key: this.user.street.code + this.user.street_number,
       };
       this.usersService.createUser(thisUser).then((user) => {
         this.operation = 'login';
-        alert('Registrado con éxito, ya puedes hacer Login.');
-        location.reload();
+        alert('Registrado con éxito, haciendo login...');
+        this.login();
       });
     }).catch((e) => {
       console.log(e);
