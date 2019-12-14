@@ -47,11 +47,6 @@ export class FrequentVisitNewPage {
     }
     this.visit.path = `frequent_visits/${this.visit.addressKey}/${this.visit.timestamp}`;
     this.visitsService.createFrequentVisit(this.visit).then(()=>{
-      let alert = this.alertCtrl.create({
-        title: 'Registro de visita guardado con éxito',
-        buttons: ['Ok']
-      });
-      alert.present();
       this.navCtrl.pop();
       this.presentModal(this.visit.path);
     });

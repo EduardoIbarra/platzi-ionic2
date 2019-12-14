@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactsService} from "../../services/contacts.service";
 import {CContactTypes, IContactType} from "../../constants/contact-type";
 
@@ -22,8 +22,6 @@ export class ContactPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private contactsService: ContactsService,
-    private alertCtrl: AlertController,
-    private modalCtrl: ModalController,
     private toastCtrl: ToastController,
   ) {
     this.user = JSON.parse(localStorage.getItem('asp_user'));

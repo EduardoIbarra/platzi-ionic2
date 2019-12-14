@@ -4,7 +4,6 @@ import {AnnouncementEditPage} from "../announcement-edit/announcement-edit";
 import {AnnouncementPage} from "../announcement/announcement";
 import {MorososService} from "../../services/morosos.service";
 import {UsersService} from "../../services/users.service";
-import {VisitType} from "../../constants/visit-type";
 
 /**
  * Generated class for the MorososPage page.

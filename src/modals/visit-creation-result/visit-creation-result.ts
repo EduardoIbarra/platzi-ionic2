@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from "ionic-angular";
+import {NavParams, ViewController} from "ionic-angular";
 import {SocialSharing} from "@ionic-native/social-sharing";
-import {TabsPage} from "../../pages/tabs/tabs";
 import {UsersService} from "../../services/users.service";
 
 /**
@@ -23,7 +22,6 @@ export class VisitCreationResultPage {
   id: string = null;
   visit: any = {};
   constructor(
-    public navController: NavController,
     public params: NavParams,
     private socialSharing: SocialSharing,
     public viewCtrl: ViewController,
