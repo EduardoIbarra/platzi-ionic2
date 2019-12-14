@@ -3,5 +3,6 @@
   <!--<ion-tab [root]="tab4Root" tabTitle="Eventos" tabIcon="calendar"></ion-tab>-->
   <ion-tab *ngIf="user" [root]="visitsTab" tabTitle="Visitas" tabIcon="home"></ion-tab>
   <ion-tab *ngIf="isGuard" [root]="visitReadTab" tabTitle="Escanear" tabIcon="barcode"></ion-tab>
-  <ion-tab [root]="profileTab" tabTitle="Perfil" tabIcon="person"></ion-tab>
+  <ion-tab *ngIf="user" [root]="profileTab" tabTitle="Perfil" tabIcon="person"></ion-tab>
+  <ion-tab *ngIf="!user" [root]="loginTab" tabTitle="Perfil" tabIcon="person"></ion-tab>
 </ion-tabs>

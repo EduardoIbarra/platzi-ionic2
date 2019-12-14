@@ -67,7 +67,6 @@ export class VisitNewPage {
       this.visit.timestamp = Date.now();
       this.visit.visited = false;
     }
-    console.log(this.visit);
     const path = this.visitsService.buildPath(this.visit);
     this.visit.path = path;
     this.visitsService.createVisit(path, this.visit).then(()=>{

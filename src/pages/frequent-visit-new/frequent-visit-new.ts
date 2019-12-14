@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, ModalController, NavController, NavParams} from 'ionic-angular';
 import {CVisitTypes, IVisitType} from "../../constants/visit-type";
 import {VisitsService} from "../../services/visits.service";
 import {UsersService} from "../../services/users.service";
+import {VisitCreationResultPage} from "../../modals/visit-creation-result/visit-creation-result";
 
 /**
  * Generated class for the VisitNewPage page.
@@ -19,17 +20,21 @@ export class FrequentVisitNewPage {
   visit: any = {};
   visitTypes: IVisitType[] = CVisitTypes;
   minDate: string = new Date().toISOString();
+  user_name: string = '';
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alertCtrl: AlertController,
               private visitsService: VisitsService,
               private usersService: UsersService,
+              private modalCtrl: ModalController,
   ) {
     this.visit = navParams.get('lugar') || {};
     this.visit.addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
+    this.user_name = this.usersService.getUserValueFromLocalStorage('nombre');
     const address = this.usersService.parseAddressFromStreetKey(this.visit.addressKey);
     this.visit.street = address.street;
     this.visit.street_number = address.number;
+    this.visit.visited_name = this.user_name;
   }
   ionViewDidLoad() {
     this.visit.date = this.minDate;
@@ -48,6 +53,11 @@ export class FrequentVisitNewPage {
       });
       alert.present();
       this.navCtrl.pop();
+      this.presentModal(this.visit.path);
     });
+  }
+  presentModal(path) {
+    const modal = this.modalCtrl.create(VisitCreationResultPage, {path: path});
+    modal.present();
   }
 }

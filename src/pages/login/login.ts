@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import { UsersService } from '../../services/users.service';
 import {CStreets, Street} from "../../constants/streets";
 
@@ -23,16 +23,14 @@ export class LoginPage {
   };
   operation = 'login';
   streets: Street[] = CStreets;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl: ViewController, public usersService: UsersService) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public usersService: UsersService,
+              public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-  }
-
-  dismiss() {
-    this.viewCtrl.dismiss();
   }
   login() {
     this.usersService.signInWithEmailAndPassword(this.user).then((data: any) => {
@@ -43,8 +41,12 @@ export class LoginPage {
           localStorage.setItem('admin', 'false');
         }
         localStorage.setItem('asp_user', JSON.stringify(u));
-        this.dismiss();
-        location.reload();
+        let loading = this.loadingCtrl.create({
+          content: 'Por favor espere...'
+        });
+        loading.present().then(() => {
+          location.reload();
+        });
       });
     }).catch((e) => {
       console.log(e);

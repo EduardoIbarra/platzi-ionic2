@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
-import {ReglamentoPage} from "../reglamento/reglamento";
 import { EventosPage } from '../eventos/eventos';
 import {AnunciosPage} from "../anuncios/anuncios";
-import {SurveysPage} from "../surveys/surveys";
 import {VisitsPage} from "../visits/visits";
 import {VisitReadPage} from "../visit-read/visit-read";
 import {UsersService} from "../../services/users.service";
+import {LoginPage} from "../login/login";
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,6 +14,7 @@ import {UsersService} from "../../services/users.service";
 export class TabsPage {
   contactsTab = HomePage;
   profileTab = ProfilePage;
+  loginTab = LoginPage;
   tab4Root = EventosPage;
   visitsTab = VisitsPage;
   visitReadTab = VisitReadPage;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from 'ionic-angular';
+import {LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {UsersService} from "../../services/users.service";
 import {MorososService} from "../../services/morosos.service";
@@ -26,6 +26,7 @@ export class ProfilePage {
     public modalCtrl: ModalController,
     public usersService: UsersService,
     public morososSerivce: MorososService,
+    public loadingCtrl: LoadingController,
   ) {
     this.user = JSON.parse(localStorage.getItem('asp_user'));
     if (!this.user) {
@@ -40,11 +41,15 @@ export class ProfilePage {
     console.log(this.user);
   }
   logout(){
-    localStorage.removeItem('admin');
-    localStorage.removeItem('asp_user');
-    this.user = null;
-    alert('Nos vemos pronto, vecin@!');
-    location.reload();
+    let loading = this.loadingCtrl.create({
+      content: 'Nos vemos pronto, vecin@!'
+    });
+    loading.present().then(() => {
+      localStorage.removeItem('admin');
+      localStorage.removeItem('asp_user');
+      this.user = null;
+      location.reload();
+    });
   }
   showLogin() {
     let modal = this.modalCtrl.create(LoginPage);
