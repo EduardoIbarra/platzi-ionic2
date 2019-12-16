@@ -62,7 +62,7 @@ export class VisitsPage {
           });
           visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
         });
-        this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type], moroso: morosos_p.find((m: any) => m.address_key == obj.addressKey) }));
+        this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type], moroso: morosos_p.filter((m: any) => m.address_key == obj.addressKey)[0] }));
       });
     } else {
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');
