@@ -26,6 +26,7 @@ export class VisitsPage {
   query: string = '';
   isGuard: boolean = false;
   viewPrevious: boolean = false;
+  viewVisited: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public visitsService: VisitsService,
@@ -38,13 +39,15 @@ export class VisitsPage {
     this.addresses_visits = [];
     let today: any = new Date(Date.now());
     if (this.isGuard) {
-      this.viewPrevious = true;
+      this.viewPrevious = false;
+      this.viewVisited = false;
       today = this.visitsService.getStringDate(today);
       combineLatest(
         this.visitsService.getVisitsForDate(today).valueChanges(),
         this.visitsService.getFrequentVisits().valueChanges(),
         this.morososService.getMorosos().valueChanges()
       ).subscribe(([visits_p, addresses_p, morosos_p]) => {
+        this.addresses_visits = [];
         this.visits = visits_p;
         this.visits.forEach((addresses) => {
           const address_visits = Object.keys(addresses).map(function(key) {
@@ -63,6 +66,7 @@ export class VisitsPage {
           visits.forEach((v) => this.addresses_visits.push(({ ...v, frequent: true })));
         });
         this.addresses_visits = this.addresses_visits.map(obj=> ({ ...obj, visit_type: VisitType[obj.type], moroso: morosos_p.filter((m: any) => m.address_key == obj.addressKey)[0] }));
+        this.new_addresses_visits = this.addresses_visits.filter(visit => !visit.visited || visit.frequent);
       });
     } else {
       const addressKey = this.usersService.getUserValueFromLocalStorage('address_key');

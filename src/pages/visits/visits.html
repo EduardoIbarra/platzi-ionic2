@@ -26,7 +26,11 @@
       <ion-label>Ver mis visitas anteriores</ion-label>
       <ion-checkbox color="dark" checked="false" [(ngModel)]="viewPrevious"></ion-checkbox>
     </ion-item>
-    <ion-item-sliding *ngFor="let item of ((viewPrevious || isGuard) ? addresses_visits : new_addresses_visits) | myFilter:query" [ngClass]="{'disabled': item?.visited}">
+    <ion-item *ngIf="this.isGuard">
+      <ion-label>Ver visitas que ya ingresaron</ion-label>
+      <ion-checkbox color="dark" checked="false" [(ngModel)]="viewVisited"></ion-checkbox>
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of ((viewPrevious || (isGuard && viewVisited)) ? addresses_visits : new_addresses_visits) | myFilter:query" [ngClass]="{'disabled': item?.visited && !item?.frequent}">
       <ion-item (click)="itemSelected(item)">
         <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
         <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>

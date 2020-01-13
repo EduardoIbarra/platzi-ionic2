@@ -1,0 +1,40 @@
+<!--
+  Generated template for the MorosoEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Moroso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Calle*</ion-label>
+      <ion-select [(ngModel)]="moroso.street">
+        <ion-option *ngFor="let st of streets" [value]="st">{{st.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Número*</ion-label>
+      <ion-input [(ngModel)]="moroso.street_number" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Adeudo*</ion-label>
+      <ion-input [(ngModel)]="moroso.debt" type="number"></ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button full (click)="guardarMoroso()" color="secondary">Guardar</button>
+    </div>
+  </ion-list>
+</ion-content>

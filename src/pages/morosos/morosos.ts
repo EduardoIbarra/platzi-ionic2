@@ -4,6 +4,7 @@ import {AnnouncementEditPage} from "../announcement-edit/announcement-edit";
 import {AnnouncementPage} from "../announcement/announcement";
 import {MorososService} from "../../services/morosos.service";
 import {UsersService} from "../../services/users.service";
+import {MorosoEditPage} from '../moroso-edit/moroso-edit';
 
 /**
  * Generated class for the MorososPage page.
@@ -37,7 +38,7 @@ export class MorososPage {
       return;
     }
     if(localStorage.getItem('admin')){
-      this.navCtrl.push(AnnouncementEditPage, {name: announcementName});
+      this.navCtrl.push(MorosoEditPage, {name: announcementName});
     }else{
       this.navCtrl.push(AnnouncementPage, {name: announcementName});
     }
@@ -50,7 +51,7 @@ export class MorososPage {
     }
   }
   deleteItem(moroso){
-    if(!confirm('Seguro que deseas eliminar este contacto?')) {
+    if(!confirm('Seguro que deseas eliminar a este moroso?')) {
       return;
     }
     if(!localStorage.getItem('admin')){
@@ -59,7 +60,7 @@ export class MorososPage {
     }
     this.morososService.deleteMoroso(moroso).then(()=>{
       let alert = this.alertCtrl.create({
-        title: 'Contacto Eliminado con Éxito',
+        title: 'Moroso Eliminado con Éxito',
         buttons: ['Ok']
       });
       alert.present();

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
+import {LoadingController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -28,7 +28,9 @@ export class MyApp {
       private statusBar: StatusBar,
       private splashScreen: SplashScreen,
       private usersService: UsersService,
+      public loadingCtrl: LoadingController,
     ) {
+    localStorage.removeItem('firebase:previous_websocket_failure');
     this.getUser();
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -61,12 +63,27 @@ export class MyApp {
     this.user = JSON.parse(localStorage.getItem('asp_user'));
     return this.user;
   }
+  cleanUpNetwork() {
+    localStorage.removeItem('firebase:previous_websocket_failure');
+    let loading = this.loadingCtrl.create({
+      content: 'Por favor espere...'
+    });
+    loading.present().then(() => {
+      location.reload();
+    });
+  }
   logout(){
+    localStorage.removeItem('firebase:previous_websocket_failure');
     localStorage.removeItem('admin');
     localStorage.removeItem('asp_user');
     this.user = null;
     alert('Nos vemos pronto, vecin@!');
-    location.reload();
+    let loading = this.loadingCtrl.create({
+      content: 'Por favor espere...'
+    });
+    loading.present().then(() => {
+      location.reload();
+    });
   }
 }
 

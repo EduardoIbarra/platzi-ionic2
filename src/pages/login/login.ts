@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import { UsersService } from '../../services/users.service';
 import {CStreets, Street} from "../../constants/streets";
+import {ResetPasswordPage} from "../reset-password/reset-password";
 
 /**
  * Generated class for the LoginPage page.
@@ -79,5 +80,8 @@ export class LoginPage {
       console.log(e);
       alert('Error: ' + e.message);
     });
+  }
+  resetPassword() {
+    this.navCtrl.push(ResetPasswordPage);
   }
 }

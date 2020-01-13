@@ -48,4 +48,7 @@ export class UsersService {
   getByPath(path) {
     return this.afDb.object(path);
   }
+  resetPassword(email: string) {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
 }

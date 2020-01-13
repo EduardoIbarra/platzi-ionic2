@@ -51,6 +51,8 @@ import {MorososPage} from "../pages/morosos/morosos";
 import {ContactPage} from "../pages/contact/contact";
 import {ContactsService} from "../services/contacts.service";
 import {ChartsModule} from "ng2-charts-x";
+import {ResetPasswordPage} from "../pages/reset-password/reset-password";
+import {MorosoEditPage} from '../pages/moroso-edit/moroso-edit';
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -74,6 +76,7 @@ export const firebaseConfig = {
     EventosPage,
     EventoPage,
     LoginPage,
+    ResetPasswordPage,
     AnnouncementPage,
     AnnouncementEditPage,
     SurveysPage,
@@ -86,6 +89,7 @@ export const firebaseConfig = {
     VisitCreationResultPage,
     MorososPage,
     ContactPage,
+    MorosoEditPage,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +116,7 @@ export const firebaseConfig = {
     EventosPage,
     EventoPage,
     LoginPage,
+    ResetPasswordPage,
     AnunciosPage,
     AnnouncementPage,
     AnnouncementEditPage,
@@ -125,6 +130,7 @@ export const firebaseConfig = {
     VisitCreationResultPage,
     MorososPage,
     ContactPage,
+    MorosoEditPage,
   ],
   providers: [
     StatusBar,

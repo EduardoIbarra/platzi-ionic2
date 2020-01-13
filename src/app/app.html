@@ -8,6 +8,7 @@
         {{p.title}}
       </ion-item>
     </ion-list>
+    <button ion-button (click)="cleanUpNetwork()" color="primary" block>Limpiar Red</button>
     <button *ngIf="getUser()" ion-button (click)="logout()" color="danger" block>Resetear y Salir</button>
   </ion-content>
 

@@ -11,14 +11,16 @@ import { PlaceEditPage } from '../place-edit/place-edit';
 export class HomePage {
   lugares: any = [];
   query: string = '';
+  isAdmin = false;
   constructor(public navCtrl: NavController, private placesService: PlacesService, private alertCtrl: AlertController) {
     this.placesService.getPlaces().valueChanges()
       .subscribe((places)=>{
         this.lugares = places;
       });
+    this.isAdmin = JSON.parse(localStorage.getItem('admin'));
   }
   irALugar(placeName){
-    if(localStorage.getItem('admin') != 'true'){
+    if(!this.isAdmin){
       alert('Usted no tiene acceso para crear lugares, contacte a su representante');
       return;
     }

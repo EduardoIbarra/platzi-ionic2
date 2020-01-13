@@ -15,7 +15,7 @@
     </div>
 
     <div *ngIf="visit?.street" class="center">
-      <h2 *ngIf="visit?.visited && !visit?.path?.includes('frequent_visits')">[ESTA VISITA HABÍA INGRESADO PREVIAMENTE]</h2>
+      <h2 *ngIf="visit?.visited && !visit?.path?.includes('frequent_visits')">[ESTA VISITA INGRESÓ PREVIAMENTE]</h2>
       <h2 *ngIf="visit?.path?.includes('frequent_visits')">[VISITANTE FRECUENTE]</h2>
       <h2 *ngIf="this.visit?.moroso" style="color: darkred">
         El residente cuenta con adeudo

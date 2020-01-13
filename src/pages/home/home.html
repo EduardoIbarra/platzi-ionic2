@@ -9,7 +9,7 @@
       Directorio ASP
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="irALugar('new')">
+      <button *ngIf="isAdmin" ion-button icon-only (click)="irALugar('new')">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
