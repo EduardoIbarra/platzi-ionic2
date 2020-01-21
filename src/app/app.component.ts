@@ -11,6 +11,7 @@ import {UsersService} from "../services/users.service";
 import {MorososPage} from "../pages/morosos/morosos";
 import {SurveysPage} from "../pages/surveys/surveys";
 import {ContactPage} from "../pages/contact/contact";
+import {VisitsPage} from '../pages/visits/visits';
 @Component({
   templateUrl: 'app.html'
 })
@@ -46,6 +47,7 @@ export class MyApp {
       if (this.isGuard || this.isAdmin) {
         this.pages.push({ title: 'Escannear Visita', component: VisitReadPage });
         this.pages.push({ title: 'Morosos', component: MorososPage });
+        this.pages.push({ title: 'Visitas (Anterior)', component: VisitsPage });
       }
       this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
       this.pages.push({ title: 'Encuestas', component: SurveysPage });
