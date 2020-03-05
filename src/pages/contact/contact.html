@@ -9,14 +9,14 @@
 
 <ion-content>
   <div padding>
-    <h4>Hola {{user.nombre}},</h4>
-    <p>Por favor haga buen uso de esta herramienta. Eviste lenguage ofensivo. Se le atenderá tan pronto como sea posible.</p>
+    <h4>Hola {{user?.nombre}},</h4>
+    <p>Por favor haga buen uso de esta herramienta. Evite lenguage ofensivo. Se le atenderá tan pronto como sea posible.</p>
   </div>
 
   <ion-list>
     <ion-item>
       <ion-label floating>Su correo*</ion-label>
-      <ion-input [(ngModel)]="user.email" type="email"></ion-input>
+      <ion-input [(ngModel)]="user && user.email" type="email"></ion-input>
     </ion-item>
 
     <ion-item>

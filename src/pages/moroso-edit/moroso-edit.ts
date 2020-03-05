@@ -21,7 +21,11 @@ export class MorosoEditPage {
               public navParams: NavParams,
               private morososService: MorososService,
               private alertCtrl: AlertController,) {
-    this.moroso = navParams.get('moroso') || {};
+    const morosoParam = navParams.get('moroso') || {};
+    this.moroso = morosoParam;
+    this.moroso.street_number = morosoParam.address && morosoParam.address.addressKey.substring(3, 6);
+    this.moroso.street = morosoParam.address && morosoParam.address.addressKey.substring(0, 3);
+    console.log(this.moroso);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MorosoEditPage');
@@ -32,7 +36,7 @@ export class MorosoEditPage {
       return;
     }
     this.morososService.createMoroso({
-      address_key: `${this.moroso.street.code}${this.moroso.street_number}`,
+      address_key: `${this.moroso.street}${this.moroso.street_number}`,
       debt: this.moroso.debt,
     }).then(()=>{
       let alert = this.alertCtrl.create({

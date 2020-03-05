@@ -45,9 +45,9 @@ export class MyApp {
       this.isGuard = this.usersService.getUserValueFromLocalStorage('isGuard');
       this.isAdmin = this.usersService.getUserValueFromLocalStorage('admin');
       if (this.isGuard || this.isAdmin) {
-        this.pages.push({ title: 'Escannear Visita', component: VisitReadPage });
         this.pages.push({ title: 'Morosos', component: MorososPage });
         this.pages.push({ title: 'Visitas (Anterior)', component: VisitsPage });
+        this.pages.push({ title: 'Escanear (Anterior)', component: VisitReadPage });
       }
       this.pages.push({ title: 'Visitas Frecuentes', component: FrequentVisitsPage });
       this.pages.push({ title: 'Encuestas', component: SurveysPage });

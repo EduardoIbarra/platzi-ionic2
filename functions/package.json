@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "ls",
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -15,7 +15,9 @@
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
     "firebase-admin": "^8.0.0",
-    "firebase-functions": "^3.1.0"
+    "firebase-functions": "^3.1.0",
+    "rxjs": "^6.5.4",
+    "rxjs-compat": "^6.5.4"
   },
   "devDependencies": {
     "eslint": "^5.12.0",

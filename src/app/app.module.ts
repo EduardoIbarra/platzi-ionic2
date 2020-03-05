@@ -53,6 +53,9 @@ import {ContactsService} from "../services/contacts.service";
 import {ChartsModule} from "ng2-charts-x";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
 import {MorosoEditPage} from '../pages/moroso-edit/moroso-edit';
+import {VisitsGuardPage} from '../pages/visits-guard/visits-guard';
+import {HttpClientModule} from '@angular/common/http';
+import {VisitReadNewPage} from '../pages/visit-read-new/visit-read-new';
 export const firebaseConfig = {
   apiKey: "AIzaSyABeT1r7uepxBHMZrVyu60jAhzWqXf6zZs",
   authDomain: "directorioasp.firebaseapp.com",
@@ -90,6 +93,8 @@ export const firebaseConfig = {
     MorososPage,
     ContactPage,
     MorosoEditPage,
+    VisitsGuardPage,
+    VisitReadNewPage,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +105,7 @@ export const firebaseConfig = {
     AnunciosPageModule,
     PipesModule,
     ChartsModule,
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -131,6 +137,8 @@ export const firebaseConfig = {
     MorososPage,
     ContactPage,
     MorosoEditPage,
+    VisitsGuardPage,
+    VisitReadNewPage,
   ],
   providers: [
     StatusBar,

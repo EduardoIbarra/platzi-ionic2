@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class VisitsService {
-  constructor(public afDB: AngularFireDatabase){
+  constructor(
+    public afDB: AngularFireDatabase,
+    public httpClient: HttpClient,
+  ){
+  }
+  public searchVisit(term){
+    return this.httpClient.get(`https://us-central1-directorioasp.cloudfunctions.net/searchVisit?term=${term}`);
+  }
+  public scanVisit(path){
+    return this.httpClient.get(`https://us-central1-directorioasp.cloudfunctions.net/scanVisit?path=${path}`);
   }
   public getVisits(){
     return this.afDB.list('/visits/');
@@ -36,6 +46,9 @@ export class VisitsService {
       this.afDB.database.ref(`${visit.path}/marbete`).set(visit.marbete);
       return this.afDB.database.ref(`${visit.path}/visited`).set(true);
     }
+  }
+  public registerVisit(visit) {
+    return this.httpClient.post(`https://us-central1-directorioasp.cloudfunctions.net/registerVisit`, visit);
   }
   public buildPath(visit) {
     const myDate: any = new Date(visit.date);

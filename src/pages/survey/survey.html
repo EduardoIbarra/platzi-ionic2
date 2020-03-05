@@ -9,6 +9,7 @@
   <div *ngIf="!survey.finished">
     <div *ngIf="isChampion">
       <h4>{{survey?.question}}</h4>
+      <iframe *ngIf="survey?.youtube_video_id" width="100%" height="315" [src]="safeUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <p *ngIf="previousAnswer">Usted ha votado por la opción <b>[{{previousAnswer.choice}}]</b>, elegir de nuevo invalidará su respuesta previa.</p>
       <ion-list radio-group [(ngModel)]="selectedOption">
         <div *ngFor="let option of survey?.options">
@@ -17,11 +18,15 @@
             <ion-radio value="{{option?.id}}"></ion-radio>
           </ion-item>
         </div>
+        <ion-item>
+          <ion-label>Comentarios</ion-label>
+          <ion-input placeholder="(Opcional)" type="text" [(ngModel)]="comments"></ion-input>
+        </ion-item>
       </ion-list>
       <button ion-button (click)="saveAnswer()" block>Votar</button>
     </div>
     <div *ngIf="!isChampion">
-      <h4>Usted no es el representante de su domicilio. Si desea darse de alta como representante o cambiar el existente, favor de contactar a un miembro del comité o a Eduardo de la Cruz y enviarle este identificador: {{user?.uid.substring(0,5)}}</h4>
+      <h4>Usted no es el representante de su domicilio. Si desea darse de alta como representante o cambiar el existente, favor de contactar a un miembro del comité o a Eduardo de la Cruz (A través de la sección de contacto de este app) y enviarle este identificador: {{user?.uid.substring(0,5)}}</h4>
     </div>
   </div>
   <div *ngIf="survey.finished">

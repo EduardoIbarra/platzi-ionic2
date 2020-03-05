@@ -1,6 +1,8 @@
 <ion-tabs color="primary">
-  <ion-tab *ngIf="!isGuard" [root]="contactsTab" tabTitle="Contactos" tabIcon="contact"></ion-tab>
-  <ion-tab *ngIf="user" [root]="visitsTab" tabTitle="Visitas" tabIcon="home"></ion-tab>
+  <ion-tab *ngIf="!isGuard" [root]="contactsTab" tabTitle="Directorio" tabIcon="contact"></ion-tab>
+  <ion-tab *ngIf="user && !isGuard" [root]="contactTab" tabTitle="Contacto" tabIcon="mail"></ion-tab>
+  <ion-tab *ngIf="user && !isGuard" [root]="visitsTab" tabTitle="Visitas" tabIcon="home"></ion-tab>
+  <ion-tab *ngIf="isGuard" [root]="visitsGuardTab" tabTitle="Visitas" tabIcon="home"></ion-tab>
   <ion-tab *ngIf="isGuard" [root]="visitReadTab" tabTitle="Escanear" tabIcon="barcode"></ion-tab>
   <ion-tab *ngIf="user" [root]="profileTab" tabTitle="Perfil" tabIcon="person"></ion-tab>
   <ion-tab *ngIf="!user" [root]="loginTab" tabTitle="Perfil" tabIcon="person"></ion-tab>

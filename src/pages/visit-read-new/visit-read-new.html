@@ -18,10 +18,10 @@
       <h2 *ngIf="visit?.visited && !visit?.path?.includes('frequent_visits')">[ESTA VISITA INGRESÓ PREVIAMENTE]</h2>
       <h2 *ngIf="visit?.path?.includes('frequent_visits')">[VISITANTE FRECUENTE]</h2>
       <h2 *ngIf="visit?.moroso?.debt" style="color: darkred">
-        El residente cuenta con adeudo
+        El residente cuenta con adeudo <b>${{visit?.moroso?.debt}}</b>
       </h2>
       <h2>{{visit?.visitor_name}} -> {{visit?.visited_name}} @{{visit?.street?.name}} {{visit?.street_number}}</h2>
-      <h4>{{visit?.date | date}}</h4>
+      <h3>{{visit?.date | date}}</h3>
     </div>
 
     <div *ngIf="visit?.street" padding>

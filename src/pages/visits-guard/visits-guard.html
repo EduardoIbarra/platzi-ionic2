@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Visitas
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="irALugar('new')">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="query" (search)="searchByKeyword($event)" ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="searchResult?.length <= 0">
+      Busque la visita arriba ^
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of searchResult">
+      <ion-item (click)="itemSelected(item)">
+        <b *ngIf="item?.visited"><span>[YA INGRESÓ] </span></b>
+        <b *ngIf="item?.frequent"><span>[FRECUENTE] </span></b>
+        <span *ngIf="item?.marbete"><br />Marbete: <b>{{item.marbete}}</b></span>
+        <h2>{{ item?.visitor_name }}</h2>
+        <h2>{{ item?.street?.name || item?.street }} {{ item?.street_number }}</h2>
+        <p><b>Residente: </b> {{ item?.visited_name }}</p>
+        <p><b>Fecha: </b> {{ item?.date | date}}</p>
+        <ion-badge *ngIf="item?.moroso" color="danger">Debe {{item?.moroso?.debt | currency}}</ion-badge>
+        <ion-badge color="{{item?.visit_type?.value?.color}}">{{item?.visit_type?.value?.description}}</ion-badge>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteVisit(item)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

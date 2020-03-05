@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactsService} from "../../services/contacts.service";
 import {CContactTypes, IContactType} from "../../constants/contact-type";
+import {HomePage} from '../home/home';
 
 /**
  * Generated class for the ContactPage page.
@@ -44,7 +45,7 @@ export class ContactPage {
       id: Date.now(),
       name: this.user.nombre,
       address_key: this.user.address_key,
-      email: this.user.email,
+      email: this.user && this.user.email,
       contact_type: this.contact.contact_type,
       message: this.contact.message,
     };
@@ -55,7 +56,7 @@ export class ContactPage {
         position: 'top'
       });
       toast.present().then((data) => {
-        this.navCtrl.pop();
+        this.navCtrl.setRoot(HomePage);
       }).catch((error) => {
         console.log(error);
       });

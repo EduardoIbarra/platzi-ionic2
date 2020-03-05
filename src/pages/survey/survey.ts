@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {SurveysService} from "../../services/surveys.service";
 import {UsersService} from "../../services/users.service";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 /**
  * Generated class for the SurveyPage page.
@@ -17,11 +18,13 @@ import {UsersService} from "../../services/users.service";
 export class SurveyPage {
   survey: any = {};
   selectedOption: string;
+  comments: string;
   user: any;
   previousAnswer: any = null;
   isChampion = false;
   address: any = null;
   surveyAnswered: any = null;
+  safeUrl: SafeResourceUrl;
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -55,14 +58,18 @@ export class SurveyPage {
     public surveysService: SurveysService,
     public userService: UsersService,
     private toastCtrl: ToastController,
+    private sanitizer: DomSanitizer,
   ) {
     this.address = this.userService.getUserValueFromLocalStorage('address_key');
     this.isChampion = this.userService.getUserValueFromLocalStorage('champion');
     this.user = JSON.parse(localStorage.getItem('asp_user'));
     this.survey = this.navParams.get('survey');
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.survey.youtube_video_id}`);
     this.barChartLabels = [this.survey.title];
-    this.surveysService.getSurveyAnswer(this.survey.id, this.address).valueChanges().subscribe((data) => {
+    this.surveysService.getSurveyAnswer(this.survey.id, this.address).valueChanges().subscribe((data: any) => {
       this.previousAnswer = data;
+      this.comments = data && data.comments;
+      this.selectedOption = data && data.choice;
     }, (error) => {
       console.log(error);
     });
@@ -101,6 +108,7 @@ export class SurveyPage {
       name: this.user.nombre,
       address: this.address,
       choice: this.selectedOption,
+      comments: this.comments || '',
       timestamp: Date.now(),
     };
     this.surveysService.postAnswer(survey).then((data) => {
